@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import api from "../api"
+import ReviewForm from "../components/ReviewForm"
 
 const GamePage = () => {
     const [game, setGame] = useState(null)
@@ -34,6 +35,12 @@ const GamePage = () => {
     return (
         <div>
             <h1>{game.title}</h1>
+            <p>{game.cover}</p>
+            <p>{game.genre}</p>
+            <p>{game.description}</p>
+            <p>{game.developer}</p>
+            <p>{game.release}</p>
+            <ReviewForm />
         </div>
     )
 }
