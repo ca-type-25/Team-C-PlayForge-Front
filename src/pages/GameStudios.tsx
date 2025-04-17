@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { Studio } from '../types/studio';
 import { Link } from 'react-router-dom';
+import api from "../api";
 
 const GameStudios: React.FC = () => {
   const [studios, setStudios] = useState<Studio[]>([]);
@@ -10,7 +11,7 @@ const GameStudios: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios.get<Studio[]>('http://localhost:3000/studios')
+    api.get<Studio[]>('/studios')
       .then(res => setStudios(res.data))
       .catch(() => setError('Failed to fetch studios'))
       .finally(() => setLoading(false));

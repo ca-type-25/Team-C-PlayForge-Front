@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from "../api";
 
 const CreateStudio: React.FC = () => {
   const [name, setName] = useState('');
@@ -17,13 +18,13 @@ const CreateStudio: React.FC = () => {
 
     try {
 
-      await axios.post('http://localhost:3000/studios', {
+      await api.post('/studios', {
         name,
         description,
         year: Number(year),
       });
 
-      navigate('/');
+      navigate('/studios');
 
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response?.data?.message) {
@@ -36,7 +37,7 @@ const CreateStudio: React.FC = () => {
   };
 
   return (
-    
+
     <div>
       <h2>Create New Studio</h2>
 

@@ -15,8 +15,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <nav>
+      <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
         <Link to="/studios">Game Studios</Link>
+        <Link to="/games">Games</Link>
+        
       </nav>
       <Routes>
         <Route>

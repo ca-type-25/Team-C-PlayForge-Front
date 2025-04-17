@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Studio } from '../types/studio';
+import api from "../api";
 
 const StudioDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +14,7 @@ const StudioDetail: React.FC = () => {
   React.useEffect(() => {
     if (!id) return;
 
-    axios.get<Studio>(`http://localhost:3000/studios/${id}`)
+    api.get<Studio>(`/studios/${id}`)
       .then(res => setStudio(res.data))
       .catch(() => setError('Failed to fetch studio'))
       .finally(() => setLoading(false));
@@ -22,9 +23,9 @@ const StudioDetail: React.FC = () => {
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this studio?')) return;
     try {
-      await axios.delete(`http://localhost:3000/studios/${id}`);
+      await api.delete(`/studios/${id}`);
 
-      navigate('/'); 
+      navigate('/studios'); 
 
     } catch (err: unknown) {
 

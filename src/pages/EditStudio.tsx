@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Studio } from '../types/studio';
+import api from "../api";
 
 const EditStudio: React.FC = () => {
 
@@ -16,7 +17,7 @@ const EditStudio: React.FC = () => {
 
   useEffect(() => {
 
-    axios.get<Studio>(`http://localhost:3000/studios/${id}`)
+    api.get<Studio>(`/studios/${id}`)
       .then(res => {
         setName(res.data.name);
         setDescription(res.data.description);
@@ -33,7 +34,7 @@ const EditStudio: React.FC = () => {
 
     setError(null);
     try {
-      await axios.put(`http://localhost:3000/studios/${id}`, {
+      await api.put(`/studios/${id}`, {
         name,
         description,
         year: Number(year),
@@ -42,7 +43,7 @@ const EditStudio: React.FC = () => {
 
     } catch (err: unknown) {
       if (axios.isAxiosError(err) && err.response?.data?.message) {
-        
+
         setError(err.response.data.message);
 
       } else {
