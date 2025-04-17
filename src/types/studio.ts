@@ -1,18 +1,11 @@
-export interface Game {
-    id: string;
-    title: string;
-    coverImageUrl?: string;
-    releaseYear?: number;
-  }
-  
-  export interface GameStudio {
-    id: string;
+
+export interface Studio {
+    _id: string;
     name: string;
-    logoUrl?: string;
-    description?: string;
-    foundedYear?: number;
-    headquarters?: string;
-    website?: string;
-    games: Game[];
+    description: string;
+    year: number;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
   }
   
