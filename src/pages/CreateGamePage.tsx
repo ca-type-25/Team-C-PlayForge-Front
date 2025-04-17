@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import GameForm from "../components/GameForm"
 
 
@@ -7,6 +8,7 @@ function CreateGamePage() {
         <div>
             <h1>Add New Game</h1>
             <GameForm />
+            <button><Link to={`/games`}>Back to games list</Link></button>
         </div>
     )
 }
