@@ -1,9 +1,11 @@
 
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router';
 import GameStudios from './pages/GameStudios';
 import StudioDetail from './pages/StudioDetail';
 import CreateStudio from './pages/CreateStudio';
 import EditStudio from './pages/EditStudio';
+
+
 
 function App() {
   return (
