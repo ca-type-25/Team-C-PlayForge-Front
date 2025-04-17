@@ -34,22 +34,7 @@ const CreateArticlePage: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    if (name === 'subjectType') {
-      setFormData(prev => ({
-        ...prev,
-        subject: { ...(prev.subject || {}), type: value as SubjectInput['type'] }
-      }));
-    } else if (name === 'subjectId') {
-        setFormData(prev => ({
-            ...prev,
-            subject: {
-                ...(prev.subject || { type: '' }), 
-                id: value
-            }
-        }));
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,39 +43,28 @@ const CreateArticlePage: React.FC = () => {
     setError(null);
     setSuccess(null);
 
-   
     if (!formData.title || !formData.content) {
         setError('Title and Content are required.');
         setLoading(false);
         return;
     }
-    if (formData.subject?.type && !formData.subject?.id) {
-        setError('Subject ID is required if Subject Type is selected.');
-        setLoading(false);
-        return;
-    }
-    if (!formData.subject?.type && formData.subject?.id) {
-        setError('Subject Type is required if Subject ID is provided.');
-        setLoading(false);
-        return;
-    }
 
-
-   
-    const articleData: Partial<ArticleInput> = { ...formData };
-    if (!articleData.video) delete articleData.video;
-    if (!articleData.image) delete articleData.image;
-    if (!articleData.subject?.type || !articleData.subject?.id) {
-        delete articleData.subject; 
-    }
+    const articleDataToSend = {
+        title: formData.title,
+        content: formData.content,
+        video: formData.video || undefined, 
+        image: formData.image || undefined, 
+        user: formData.user || undefined   
+    };
 
 
     try {
-      await axios.post('http://localhost:3000/articles', articleData, {
+      // Send the filtered data
+      await axios.post('http://localhost:3000/articles', articleDataToSend, {
       });
 
       setSuccess('Article created successfully!');
-      setFormData({ title: '', content: '', video: '', image: '', subject: { type: '' } }); 
+      setFormData({ title: '', content: '', video: '', image: '', user: '', subject: { type: '' } });
       setTimeout(() => navigate('/articles'), 1500);
 
     } catch (err) {
@@ -157,37 +131,6 @@ const CreateArticlePage: React.FC = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
-
-                 <Row className="mb-3">
-                    <Col md={6}>
-                        <Form.Group controlId="formArticleSubjectType">
-                        <Form.Label>Subject Type (Optional)</Form.Label>
-                        <Form.Select
-                            name="subjectType"
-                            value={formData.subject?.type}
-                            onChange={handleChange}
-                        >
-                            <option value="">Select Type...</option>
-                            <option value="Game">Game</option>
-                            <option value="Studio">Studio</option>
-                            <option value="Genre">Genre</option>
-                        </Form.Select>
-                        </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                        <Form.Group controlId="formArticleSubjectId">
-                        <Form.Label>Subject ID (Required if Type selected)</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter Subject ID (e.g., game ID)"
-                            name="subjectId"
-                            value={formData.subject?.id || ''}
-                            onChange={handleChange}
-                            disabled={!formData.subject?.type} 
-                        />
-                        </Form.Group>
-                    </Col>
-                 </Row>
 
 
                 <Button variant="primary" type="submit" disabled={loading}>

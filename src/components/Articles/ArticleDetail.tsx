@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Container, Badge, Card } from 'react-bootstrap';
 import './ArticleDetail.css';
 
+
 interface Subject {
   id: string;
   type: 'Game' | 'Studio' | 'Genre';
@@ -24,7 +25,6 @@ interface Article {
 
 
 const ArticleDetail: React.FC = () => {
-  // Update the useParams call to match React Router v6 typing
   const { id } = useParams<{ id: string }>();
   
   const [article, setArticle] = useState<Article | null>(null);
@@ -47,10 +47,22 @@ const ArticleDetail: React.FC = () => {
     fetchArticle();
   }, [id]);
 
-  if (loading) return <div className="text-center mt-5">Loading article...</div>;
-  if (error) return <div className="text-center mt-5 text-danger">{error}</div>;
-  if (!article) return <div className="text-center mt-5">Article not found</div>;
+  if (loading) {
+      console.log("Rendering: Loading state"); 
+      return <div className="text-center mt-5">Loading article...</div>;
+  }
 
+  if (error) {
+      console.log("Rendering: Error state -", error); 
+      return <div className="text-center mt-5 text-danger">{error}</div>;
+  }
+
+  if (!article) {
+      console.log("Rendering: Article not found state (article is null/undefined)"); 
+      return <div className="text-center mt-5">Article not found or failed to load.</div>;
+  }
+
+  console.log("Rendering: Article details for", article.title); 
   return (
     <Container className="mt-4 article-detail">
       <Link to="/articles" className="btn btn-outline-secondary mb-4">

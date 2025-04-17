@@ -1,0 +1,82 @@
+.articles-list-container {
+  max-width: 1140px; 
+  margin: 0 auto; 
+  padding: 2rem 1rem; 
+}
+
+
+.articles-list-container h1 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #333;
+}
+
+
+.create-article-link {
+    display: block;
+    text-align: right; 
+    margin-bottom: 1.5rem; 
+}
+
+
+.article-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  margin-bottom: 1.5rem; 
+  border: none; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.article-card:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+}
+
+
+.article-card-image {
+  height: 200px; 
+  object-fit: cover; 
+  border-top-left-radius: calc(0.375rem - 1px);
+  border-top-right-radius: calc(0.375rem - 1px);
+}
+
+
+.article-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px; 
+}
+
+
+.article-card .card-title {
+  margin-bottom: 0.75rem;
+  color: #212529;
+}
+
+
+.article-card .card-text {
+  flex-grow: 1; 
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+
+.article-card .btn-primary {
+  align-self: flex-start; 
+}
+
+
+.loading-text, .error-text {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+}
+
+.error-text {
+    color: #dc3545; 
+}

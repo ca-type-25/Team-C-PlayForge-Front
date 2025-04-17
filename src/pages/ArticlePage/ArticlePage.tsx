@@ -1,14 +1,12 @@
 import React from 'react';
-import ArticlesList from '../../components/Articles/ArticlesList';
-
+import SingleArticleDisplay from '../../components/Articles/SingleArticleDisplay';
 
 const ArticlePage: React.FC = () => {
   return (
-    <div className="articles-page"> 
-      <ArticlesList />
+    <div>
+      <SingleArticleDisplay />
     </div>
   );
 };
-
 
 export default ArticlePage;
