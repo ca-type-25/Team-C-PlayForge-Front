@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import GameForm from "../components/GameForm";
 import api from "../api";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
 
 type GameFormProps = {
@@ -64,6 +64,8 @@ function EditGamePage() {
             <h1>Edit Game: {game.title}</h1>
             
             <GameForm editGameData={game}/>
+
+            <button><Link to={`/games`}>Back to games list</Link></button>
         </div>
     )
 }

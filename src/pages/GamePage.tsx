@@ -7,11 +7,16 @@ interface Genre {
     title:string
 }
 
+interface Studio {
+    _id: string,
+    name:string
+}
+
 interface Game {
     _id: string
     title: string
     description: string
-    studio: string
+    studio: Studio
     release: number
     cover: string
     video: string
@@ -46,6 +51,12 @@ const GamePage = () => {
         fetchGame()
     }, [id])
 
+    useEffect(() => {
+        if (game) {
+            console.log("Game genres:", game.genres)
+        }
+    }, [game])
+
     const deleteHandler = () => {
         api.delete(`/games/${id}`)
         navigate('/games')
@@ -70,7 +81,7 @@ const GamePage = () => {
             <img src={game.cover} alt={game.title} />
             <p>{game.description}</p>
             <p>Genre: {game.genres.map(genre => genre.title).join(', ')}</p>
-            <p>Studio: {game.studio}</p>
+            <p>Studio: {game.studio.name}</p>
             <p>Release date: {game.release}</p>
             {game.video ? (
                 <iframe src={game.video} style={{ border: "none" }}></iframe>
@@ -79,6 +90,7 @@ const GamePage = () => {
             )}
             <button><Link to={`/games/edit/${game._id}`}>Edit game</Link></button>
             <button onClick={deleteHandler}>Delete</button>
+            <button><Link to={`/games`}>Back to games list</Link></button>
         </div>
     )
 }

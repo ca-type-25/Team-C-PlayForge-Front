@@ -8,12 +8,17 @@ type Genre = {
     description?: string;
 }
 
+interface Studio {
+    _id: string,
+    name:string
+}
+
 type GameFormProps = {
     title: string,
     cover: string,
     genres: string[],
     description: string,
-    studio: string [],
+    studio: Studio,
     release: string,
     video: string,
     editGameData?: {
@@ -38,7 +43,8 @@ function GameForm(props: GameFormProps) {
     const [genres, setGenres] = useState<Genre[]>([])
     const [selectedGenre, setSelectedGenre] = useState('')
     const [description, setDescription] = useState('')
-    const [studio, setStudio] = useState('')
+    const [studios, setStudios] = useState<Studio[]>([])
+    const [selectedStudio, setSelectedStudio] = useState('')
     const [release, setRelease] = useState('')
     const [video, setVideo] = useState('')
 
@@ -57,6 +63,19 @@ function GameForm(props: GameFormProps) {
 
     }, [])
 
+    useEffect(() => {
+        const fetchStudios = async () => {
+            const res = await api.get(`/studios`)
+            const studiosData = res.data
+
+            setStudios(studiosData)
+            setSelectedStudio(studiosData[0].id || '')
+            
+        }
+        fetchStudios()
+
+    }, [])
+
 
     const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)
     const coverHandler = (event: React.ChangeEvent<HTMLInputElement>) => setCover(event.target.value)
@@ -65,7 +84,7 @@ function GameForm(props: GameFormProps) {
 
     const descriptionHandler = (event: React.ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)
 
-    const studioHandler = (event: React.ChangeEvent<HTMLInputElement>) => setStudio(event.target.value)
+    const selectedStudioHandler = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedStudio(event.target.value)
 
     const releaseHandler = (event: React.ChangeEvent<HTMLInputElement>) => setRelease(event.target.value)
     const videoHandler = (event: React.ChangeEvent<HTMLInputElement>) => setVideo(event.target.value)
@@ -78,7 +97,7 @@ function GameForm(props: GameFormProps) {
             cover,
             genre: selectedGenre,
             description,
-            studio,
+            studio: selectedStudio,
             release,
             video
         }
@@ -117,7 +136,11 @@ function GameForm(props: GameFormProps) {
                 </div>
                 <div className="form-control">
                     <label htmlFor="studio">Studio</label>
-                    <input type="text" name="studio" id="studio" value={studio} onChange={studioHandler}/>
+                    <select value={selectedStudio} onChange={selectedStudioHandler}>
+                        {studios.map(studio => (
+                            <option key={studio._id} value={studio._id}>{studio.name}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="form-control">
                     <label htmlFor="release">Release</label>
