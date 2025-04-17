@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router"
 import api from "../api"
 
+
 interface Genre {
     _id: string,
     title:string

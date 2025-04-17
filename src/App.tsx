@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, Link } from 'react-router'
-import './App.css'
+
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
 import CreateGamePage from './pages/CreateGamePage'
@@ -15,10 +15,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
       <nav>
         <Link to="/studios">Game Studios</Link>
       </nav>
+      <Routes>
         <Route>
           <Route path="/games" element={<GamesPage />} />
           <Route path="/games/:id" element={<GamePage />} />

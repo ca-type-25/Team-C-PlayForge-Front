@@ -12,7 +12,7 @@ const StudioDetail: React.FC = () => {
 
   React.useEffect(() => {
     if (!id) return;
-    
+
     axios.get<Studio>(`http://localhost:3000/studios/${id}`)
       .then(res => setStudio(res.data))
       .catch(() => setError('Failed to fetch studio'))
@@ -53,7 +53,7 @@ const StudioDetail: React.FC = () => {
         Delete Studio
       </button>
       <br />
-      <Link to="/">Back to Studios</Link>
+      <Link to="/studios">Back to Studios</Link>
     </div>
   );
 };
