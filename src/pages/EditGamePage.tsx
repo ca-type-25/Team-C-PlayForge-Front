@@ -5,13 +5,6 @@ import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
 
 type GameFormProps = {
-    title: string,
-    cover: string,
-    genres: string[],
-    description: string,
-    studio: string,
-    release: string,
-    video: string,
     editGameData?: {
         _id: string,
         title: string,

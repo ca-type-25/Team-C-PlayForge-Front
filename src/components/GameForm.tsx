@@ -14,13 +14,6 @@ interface Studio {
 }
 
 type GameFormProps = {
-    title: string,
-    cover: string,
-    genres: string[],
-    description: string,
-    studio: Studio,
-    release: string,
-    video: string,
     editGameData?: {
         _id: string,
         title: string,
