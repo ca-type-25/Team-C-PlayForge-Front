@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { Form, Button, Container, Alert, Card, Row, Col } from 'react-bootstrap';
-
+import { getArticleById, updateArticle } from '../../api/articlesApi';
+import { getAllUsers, User } from '../../api/usersApi';
+import { getAllSubjects, Subject } from '../../api/subjectsApi';
 
 interface ArticleFormData {
   title: string;
   content: string;
   image?: string;
   video?: string;
+  users: string[];
+  subjects: string[];
 }
 
 const EditArticlePage: React.FC = () => {
@@ -20,14 +23,16 @@ const EditArticlePage: React.FC = () => {
     content: '',
     image: '',
     video: '',
+    users: [],
+    subjects: []
   });
   const [loading, setLoading] = useState<boolean>(false); 
   const [initialLoading, setInitialLoading] = useState<boolean>(true); 
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [availableUsers, setAvailableUsers] = useState<User[]>([]);
+  const [availableSubjects, setAvailableSubjects] = useState<Subject[]>([]);
 
-
- 
   useEffect(() => {
     if (!id) {
         setError("Article ID is missing.");
@@ -35,32 +40,50 @@ const EditArticlePage: React.FC = () => {
         return;
     };
 
-    const fetchArticleData = async () => {
+    const fetchData = async () => {
       setInitialLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`http://localhost:3000/articles/${id}`);
-        const { title, content, image, video /*, subject, user */ } = response.data;
+        // Fetch article, users, and subjects data in parallel
+        const [articleData, usersData, subjectsData] = await Promise.all([
+          getArticleById(id),
+          getAllUsers(),
+          getAllSubjects()
+        ]);
+        
+        const { title, content, image, video, users, subjects } = articleData;
+        
         setFormData({
           title,
           content,
           image: image || '',
           video: video || '',
+          users: users || [],
+          subjects: subjects || []
         });
+        
+        setAvailableUsers(usersData);
+        setAvailableSubjects(subjectsData);
       } catch (err) {
-        console.error("Failed to fetch article data for editing", err);
-        setError("Failed to load article data. Please try again.");
+        console.error("Failed to fetch data for editing", err);
+        setError("Failed to load necessary data. Please try again.");
       } finally {
         setInitialLoading(false);
       }
     };
 
-    fetchArticleData();
+    fetchData();
   }, [id]); 
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleMultiSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name } = e.target;
+    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
+    setFormData(prev => ({ ...prev, [name]: selectedOptions }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,36 +92,31 @@ const EditArticlePage: React.FC = () => {
     setError(null);
     setSuccess(null);
 
-
     if (!formData.title || !formData.content) {
         setError('Title and Content are required.');
         setLoading(false);
         return;
     }
 
-    
     const articleDataToUpdate = {
         title: formData.title,
         content: formData.content,
         video: formData.video || undefined,
         image: formData.image || undefined,
+        users: formData.users.length > 0 ? formData.users : undefined,
+        subjects: formData.subjects.length > 0 ? formData.subjects : undefined,
     };
 
+ 
     try {
-      await axios.put(`http://localhost:3000/articles/${id}`, articleDataToUpdate, {
-      });
-
+      await updateArticle(id!, articleDataToUpdate);
+    
       setSuccess('Article updated successfully!');
       setTimeout(() => navigate(`/articles/${id}`), 1500);
-
+    
     } catch (err) {
       console.error('Error updating article:', err);
-      let message = 'Failed to update article. Please try again.';
-       if (axios.isAxiosError(err)) {
-           message = err.response?.data?.message || err.message;
-       } else if (err instanceof Error) {
-           message = err.message;
-       }
+      const message = 'Failed to update article. Please try again.';
       setError(message);
     } finally {
       setLoading(false);
@@ -162,6 +180,44 @@ const EditArticlePage: React.FC = () => {
                   />
                 </Form.Group>
 
+                {/* New form groups for users and subjects */}
+                <Form.Group className="mb-3" controlId="formArticleUsers">
+                  <Form.Label>Users</Form.Label>
+                  <Form.Select
+                    multiple
+                    name="users"
+                    value={formData.users}
+                    onChange={handleMultiSelectChange}
+                  >
+                    {availableUsers.map(user => (
+                      <option key={user._id} value={user._id}>
+                        {user.username}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Text className="text-muted">
+                    Hold Ctrl (or Cmd on Mac) to select multiple users
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formArticleSubjects">
+                  <Form.Label>Subjects</Form.Label>
+                  <Form.Select
+                    multiple
+                    name="subjects"
+                    value={formData.subjects}
+                    onChange={handleMultiSelectChange}
+                  >
+                    {availableSubjects.map(subject => (
+                      <option key={subject._id} value={subject._id}>
+                        {subject.title} ({subject.description})
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Text className="text-muted">
+                    Hold Ctrl (or Cmd on Mac) to select multiple subjects
+                  </Form.Text>
+                </Form.Group>
 
                 <Button variant="primary" type="submit" disabled={loading || initialLoading}>
                   {loading ? 'Updating...' : 'Update Article'}
@@ -175,4 +231,4 @@ const EditArticlePage: React.FC = () => {
   );
 };
 
-export default EditArticlePage; 
+export default EditArticlePage;

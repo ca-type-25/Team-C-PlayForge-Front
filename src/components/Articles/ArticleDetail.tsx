@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import { Container, Badge, Card } from 'react-bootstrap';
 import './ArticleDetail.css';
-
+import { getArticleById } from '../../api/articlesApi';
 
 interface Subject {
   id: string;
@@ -22,8 +21,6 @@ interface Article {
   updatedAt: string;
 }
 
-
-
 const ArticleDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   
@@ -33,9 +30,15 @@ const ArticleDetail: React.FC = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
+      if (!id) {
+        setError('Article ID is missing');
+        setLoading(false);
+        return;
+      }
+      
       try {
-        const response = await axios.get<Article>(`http://localhost:3000/articles/${id}`);
-        setArticle(response.data);
+        const articleData = await getArticleById(id);
+        setArticle(articleData);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch article');
