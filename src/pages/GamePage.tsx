@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router"
 import api from "../api"
 
+
 interface Genre {
     _id: string,
     title:string
@@ -81,7 +82,7 @@ const GamePage = () => {
             <img src={game.cover} alt={game.title} style={{width:"200px"}} />
             <p>{game.description}</p>
             <p>Genre: {game.genres.map(genre => genre.title).join(', ')}</p>
-            <p>Studio: {game.studio.name}</p>
+            <p><Link to={`/studios/${game.studio._id}`}>{game.studio.name}</Link> Studio: {game.studio.name}</p>
             <p>Release date: {game.release}</p>
             {game.video ? (
                 <iframe src={game.video} style={{ border: "none" }}></iframe>

@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
-import './App.css'
+import { BrowserRouter, Route, Routes, Link } from 'react-router'
+
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
 import CreateGamePage from './pages/CreateGamePage'
@@ -12,12 +12,27 @@ import CommentsPage from './pages/CommentsPage'
 import CommentPage from './pages/CommentPage'
 import CreateCommentPage from './pages/createCommentPage'
 import EditCommentPage from './pages/EditCommentPage'
+import GameStudios from './pages/GameStudios';
+import StudioDetail from './pages/StudioDetail';
+import CreateStudio from './pages/CreateStudio';
+import EditStudio from './pages/EditStudio';
+import ArticlePage from './pages/ArticlePage/ArticlePage'; 
+import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
+import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
+import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
 
 
-function App() {
 
+
+const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
+        <Link to="/studios">Game Studios</Link>
+        <Link to="/games">Games</Link>
+        <Link to="/articles">Articles</Link>
+        
+      </nav>
       <Routes>
         <Route>
           <Route path="/games" element={<GamesPage />} />
@@ -34,10 +49,22 @@ function App() {
           <Route path="/comments:id" element={<CommentPage />} />
           <Route path="/comments/create" element={<CreateCommentPage />} />
           <Route path="/comments/edit/:id" element={<EditCommentPage />} />
+          
+          <Route path="/studios" element={<GameStudios />} />
+          <Route path="/studios/:id" element={<StudioDetail />} />
+          <Route path="/studios/create" element={<CreateStudio />} />
+          <Route path="/studios/:id/edit" element={<EditStudio />} />
+          
+          <Route path="/articles" element={<ArticlesPage />} />
+          <Route path="/articles/create" element={<CreateArticlePage />} />
+          <Route path="/articles/:id/edit" element={<EditArticlePage />} />
+          <Route path="/articles/:id" element={<ArticlePage />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
   )
 }
 
-export default App
+
+export default App;
