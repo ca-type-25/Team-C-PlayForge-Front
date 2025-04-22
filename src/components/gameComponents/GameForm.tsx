@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import api from "../api"
+import api from "../../api"
 import { useEffect, useState } from "react"
 
 type Genre = {

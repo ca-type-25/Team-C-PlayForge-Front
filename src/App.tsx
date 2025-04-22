@@ -20,7 +20,10 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
-
+import GenresPage from './pages/GenresPage'
+import GenrePage from './pages/GenrePage'
+import CreateGenrePage from './pages/CreateGenrePage'
+import EditGenrePage from './pages/EditGenrePage'
 
 
 
@@ -59,6 +62,11 @@ const App: React.FC = () => {
           <Route path="/articles/create" element={<CreateArticlePage />} />
           <Route path="/articles/:id/edit" element={<EditArticlePage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />
+
+          <Route path="/genres" element={<GenresPage />} />
+          <Route path="/genres/:id" element={<GenrePage />} />
+          <Route path="/genres/create" element={<CreateGenrePage />} />
+          <Route path="/genres/edit/:id" element={<EditGenrePage />} />
 
         </Route>
       </Routes>
