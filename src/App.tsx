@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Link } from 'react-router'
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -12,20 +12,22 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
-
+import { ArticleProvider } from './contexts/ArticleContext';
 
 
 const App: React.FC = () => {
   return (
+    
+
+   
     <BrowserRouter>
       <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
         <Link to="/studios">Game Studios</Link>
         <Link to="/games">Games</Link>
         <Link to="/articles">Articles</Link>
-        
       </nav>
-      <Routes>
-        <Route>
+      <ArticleProvider>
+        <Routes>
           <Route path="/games" element={<GamesPage />} />
           <Route path="/games/:id" element={<GamePage />} />
           <Route path="/games/create" element={<CreateGamePage />} />
@@ -38,9 +40,10 @@ const App: React.FC = () => {
           <Route path="/articles/create" element={<CreateArticlePage />} />
           <Route path="/articles/:id/edit" element={<EditArticlePage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </ArticleProvider>
     </BrowserRouter>
+  
   )
 }
 
