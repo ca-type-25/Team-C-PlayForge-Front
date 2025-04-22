@@ -79,7 +79,7 @@ const GamePage = () => {
     return (
         <div>
             <h1>{game.title}</h1>
-            <img src={game.cover} alt={game.title} />
+            <img src={game.cover} alt={game.title} style={{width:"200px"}} />
             <p>{game.description}</p>
             <p>Genre: {game.genres.map(genre => genre.title).join(', ')}</p>
             <p><Link to={`/studios/${game.studio._id}`}>{game.studio.name}</Link> Studio: {game.studio.name}</p>
@@ -92,6 +92,7 @@ const GamePage = () => {
             <button><Link to={`/games/edit/${game._id}`}>Edit game</Link></button>
             <button onClick={deleteHandler}>Delete</button>
             <button><Link to={`/games`}>Back to games list</Link></button>
+            <button><Link to={`/reviews/create`}>Add review</Link></button>
         </div>
     )
 }
