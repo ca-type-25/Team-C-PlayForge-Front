@@ -15,16 +15,13 @@ import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
 
 
 
-function App() {
-
-
-
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
         <Link to="/studios">Game Studios</Link>
         <Link to="/games">Games</Link>
+        <Link to="/articles">Articles</Link>
         
       </nav>
       <Routes>
