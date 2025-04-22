@@ -1,0 +1,58 @@
+
+.article-detail {
+  max-width: 900px; 
+  margin-bottom: 2rem;
+}
+
+
+.article-image-container {
+  width: 100%;
+  max-height: 400px; 
+  overflow: hidden; 
+  margin-bottom: 1.5rem; 
+  border-radius: 0.25rem 0.25rem 0 0; 
+}
+
+
+.article-header-image {
+  width: 100%;
+  height: auto; 
+  object-fit: cover; 
+  display: block; 
+}
+
+
+.article-content {
+  line-height: 1.7; 
+  font-size: 1.1rem; 
+  color: #333; 
+  margin-top: 1.5rem; 
+}
+
+.article-content p {
+  margin-bottom: 1.25rem; 
+}
+
+
+.ratio iframe {
+  border-radius: 0.25rem; 
+}
+
+
+.btn-outline-secondary {
+    margin-bottom: 1.5rem; 
+}
+
+
+.mb-4 small.text-muted {
+    font-size: 0.9em;
+}
+
+.mb-4 .badge {
+    vertical-align: middle; 
+}
+
+
+.article-detail .card {
+    background-color: #ffffff; 
+}

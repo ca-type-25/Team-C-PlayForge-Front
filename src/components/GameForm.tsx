@@ -14,13 +14,6 @@ interface Studio {
 }
 
 type GameFormProps = {
-    title: string,
-    cover: string,
-    genres: string[],
-    description: string,
-    studio: Studio,
-    release: string,
-    video: string,
     editGameData?: {
         _id: string,
         title: string,
@@ -56,7 +49,7 @@ function GameForm(props: GameFormProps) {
             const genresData = res.data
 
             setGenres(genresData)
-            setSelectedGenre(genresData[0].id || '')
+            setSelectedGenre(genresData[0]._id || '')
             
         }
         fetchGenres()
@@ -69,7 +62,7 @@ function GameForm(props: GameFormProps) {
             const studiosData = res.data
 
             setStudios(studiosData)
-            setSelectedStudio(studiosData[0].id || '')
+            setSelectedStudio(studiosData[0]._id || '')
             
         }
         fetchStudios()
@@ -95,7 +88,7 @@ function GameForm(props: GameFormProps) {
         const newGame = {
             title,
             cover,
-            genre: selectedGenre,
+            genre: [selectedGenre],
             description,
             studio: selectedStudio,
             release,
