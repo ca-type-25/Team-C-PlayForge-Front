@@ -45,7 +45,7 @@ const EditSubjectPage: React.FC = () => {
         title: subject.title,
         description: subject.description
       });
-      navigate(`/subject/${id}`);
+      navigate(`/subjects/${id}`);
     } catch (err) {
       setError('Failed to update subject. Please try again.');
       console.error('Error updating subject:', err);

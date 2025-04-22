@@ -45,20 +45,16 @@ export const getSubjectById = async (id: string) => {
 
 export const createSubject = async (subjectData: Omit<Subject, '_id'>) => {
   try {
-    console.log('Sending subject data:', JSON.stringify(subjectData));
-    
-    // For development: Skip authentication check
-    // In production, you would use this code instead:
-    // const token = localStorage.getItem('authToken');
-    // if (!token) {
-    //   throw new Error('Authentication token is missing. Please log in again.');
-    // }
-    
-    // Development mode - send request without authentication
+      const token = localStorage.getItem('authToken');  // Original line commented out
+      
+      if (!token) {
+        throw new Error('Authentication token is missing. Please log in again.');
+      }
+
     const response = await axios.post(`${API_BASE_URL}/subjects`, subjectData, {
       headers: {
-        'Content-Type': 'application/json'
-        // Authentication header removed for development
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     });
     return response.data;
@@ -74,7 +70,17 @@ export const createSubject = async (subjectData: Omit<Subject, '_id'>) => {
 
 export const updateSubject = async (id: string, subjectData: Partial<Omit<Subject, '_id'>>) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/subjects/${id}`, subjectData);
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      throw new Error('Authentication token is missing. Please log in again.');
+    }
+
+    const response = await axios.put(`${API_BASE_URL}/subjects/${id}`, subjectData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
     return response.data;
   } catch (error) {
     console.error(`Error updating subject with ID ${id}:`, error);

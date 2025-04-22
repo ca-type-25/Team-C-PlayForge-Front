@@ -48,7 +48,7 @@ const SubjectsPage: React.FC = () => {
                 <Card.Title>{subject.title}</Card.Title>
                 <Card.Text>{subject.description}</Card.Text>
                 <Link 
-                  to={`/subject/${subject._id}`} 
+                  to={`/subjects/${subject._id}`} 
                   className="btn btn-primary"
                 >
                   View Details
