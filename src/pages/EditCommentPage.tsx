@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
-import GameForm from "../components/GameForm";
 import api from "../api";
 import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
+import CommentForm from "../components/CommentForm";
 
-type GameFormProps = {
-    editGameData?: {
+
+type CommentFormProps = {
+    editCommentData?: {
         _id: string,
-        title: string,
-        cover: string,
-        genre: string[],
-        description: string,
-        studio: string,
-        release: string,
-        video: string,
+        message: string,
+        picture: string,
+        topic: string,
+        user: string
     }
-
 }
 
-function EditGamePage() {
-    const [game, setGame] = useState<GameFormProps["editGameData"] | null>(null)
+function EditCommentPage() {
+    const [comment, setComment] = useState<CommentFormProps["editCommentData"] | null>(null)
     const [error, setError] = useState('')
 
     const { id } = useParams()
@@ -29,8 +26,8 @@ function EditGamePage() {
             
 
             try {
-                const { data } = await api.get(`/games/${id}`)
-                setGame(data)
+                const { data } = await api.get(`/comments/${id}`)
+                setComment(data)
             } catch (error) {
                 if (error instanceof AxiosError) {
                     console.log(error)
@@ -48,19 +45,19 @@ function EditGamePage() {
         return <p>{error}</p>
     }
 
-    if (!game) {
+    if (!comment) {
         return "Loading..."
     }
 
     return (
         <div>
-            <h1>Edit Game: {game.title}</h1>
+            <h1>Edit comment: {comment.message}</h1>
             
-            <GameForm editGameData={game}/>
+            <CommentForm editCommentData={comment}/>
 
-            <button><Link to={`/games`}>Back to games list</Link></button>
+            <button><Link to={`/comments`}>Back to comments list</Link></button>
         </div>
     )
 }
 
-export default EditGamePage
+export default EditCommentPage
