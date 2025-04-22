@@ -8,6 +8,10 @@ import ReviewsPage from './pages/ReviewsPage'
 import ReviewPage from './pages/ReviewPage'
 import CreateReviewPage from './pages/CreateReviewPage'
 import EditReviewPage from './pages/EditReviewPage'
+import CommentsPage from './pages/CommentsPage'
+import CommentPage from './pages/CommentPage'
+import CreateCommentPage from './pages/createCommentPage'
+import EditCommentPage from './pages/EditCommentPage'
 
 
 function App() {
@@ -25,6 +29,11 @@ function App() {
           <Route path="/reviews/:id" element={<ReviewPage />} />
           <Route path="/reviews/create" element={<CreateReviewPage />} />
           <Route path="/reviews/edit/:id" element={<EditReviewPage />} />
+
+          <Route path="/comments" element={<CommentsPage />} />
+          <Route path="/comments:id" element={<CommentPage />} />
+          <Route path="/comments/create" element={<CreateCommentPage />} />
+          <Route path="/comments/edit/:id" element={<EditCommentPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
