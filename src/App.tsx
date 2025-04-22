@@ -12,10 +12,10 @@ import CommentsPage from './pages/CommentsPage'
 import CommentPage from './pages/CommentPage'
 import CreateCommentPage from './pages/createCommentPage'
 import EditCommentPage from './pages/EditCommentPage'
-import GameStudios from './pages/GameStudios';
-import StudioDetail from './pages/StudioDetail';
-import CreateStudio from './pages/CreateStudio';
-import EditStudio from './pages/EditStudio';
+import GameStudios from './pages/Studios/GameStudios';
+import StudioDetail from './pages/Studios/StudioDetail';
+import CreateStudio from './pages/Studios/CreateStudio';
+import EditStudio from './pages/Studios/EditStudio';
 import ArticlePage from './pages/ArticlePage/ArticlePage'; 
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';

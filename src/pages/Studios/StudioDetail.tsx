@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { Studio } from '../types/studio';
-import api from "../api";
-import StudiosList from '../components/StudiosList';
-import { useStudios } from '../contexts/StudioContext'; 
+import { Studio } from '../../types/studio';
+import api from "../../api";
+import StudiosList from '../../components/StudiosList';
+import { useStudios } from '../../contexts/StudioContext'; 
+
 
 const StudioDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -61,14 +62,20 @@ const StudioDetail: React.FC = () => {
       <Link to="/studios">← Back to Studios</Link>
 
       <div style={{ marginTop: 40 }}>
-        <h3>Games by {studio.name}</h3>
-        {studio.games?.length > 0 ? (
-          <ul>
-            {studio.games.map(game => (
-              <li key={game._id}>{game.title} ({game.release})</li>
-            ))}
-          </ul>
-        ) : <p>No games listed yet.</p>}
+      <h3>Games by {studio.name}</h3>
+{studio.games?.length > 0 ? (
+  <ul>
+    {studio.games.map(game => (
+      <li key={game._id}>
+        <Link to={`/games/${game._id}`}>
+          {game.title} ({game.release})
+        </Link>
+      </li>
+    ))}
+  </ul>
+) : (
+  <p>No games listed yet.</p>
+)}
       </div>
 
       <div style={{ marginTop: 40 }}>

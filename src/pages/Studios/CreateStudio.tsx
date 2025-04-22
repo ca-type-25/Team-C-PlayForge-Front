@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
-import api from "../api";
-import { Game } from '../types/studio';
-import { SelectOption } from '../types/studio';
+import api from "../../api";
+import { Game } from '../../types/studio';
+import { SelectOption } from '../../types/studio';
 
 
 

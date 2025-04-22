@@ -1,7 +1,7 @@
 
 import React from 'react';
-import StudiosList from '../components/StudiosList';
-import { useStudios } from '../contexts/StudioContext';
+import StudiosList from '../../components/StudiosList';
+import { useStudios } from '../../contexts/StudioContext';
 import { Link } from 'react-router-dom';
 
 const GameStudios: React.FC = () => {
