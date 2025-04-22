@@ -20,6 +20,9 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
+import AdminRoute from './components/AdminRoute'
 
 
 
@@ -31,6 +34,8 @@ const App: React.FC = () => {
         <Link to="/studios">Game Studios</Link>
         <Link to="/games">Games</Link>
         <Link to="/articles">Articles</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
         
       </nav>
       <Routes>
@@ -52,13 +57,21 @@ const App: React.FC = () => {
           
           <Route path="/studios" element={<GameStudios />} />
           <Route path="/studios/:id" element={<StudioDetail />} />
+          
           <Route path="/studios/create" element={<CreateStudio />} />
+          
           <Route path="/studios/:id/edit" element={<EditStudio />} />
           
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/articles/create" element={<CreateArticlePage />} />
           <Route path="/articles/:id/edit" element={<EditArticlePage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />
+
+          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+
 
         </Route>
       </Routes>
