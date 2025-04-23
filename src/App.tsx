@@ -52,6 +52,11 @@ const App: React.FC = () => {
         <Route path="/subjects" element={<SubjectsPage />} />
         <Route path="/subjects/:id" element={<SubjectPage />} />
 
+        <Route path="/subjects" element={<SubjectsPage />} />
+        <Route path="/subjects/create" element={<CreateSubjectPage />} />
+        <Route path="/subjects/:id/edit" element={<EditSubjectPage />} />
+        <Route path="/subjects/:id" element={<SubjectPage />} />
+
      
         <Route path="/games/create" element={
           <AdminRoute>
