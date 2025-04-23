@@ -88,7 +88,7 @@ function GameForm(props: GameFormProps) {
         const newGame = {
             title,
             cover,
-            genre: [selectedGenre],
+            genres: [selectedGenre],
             description,
             studio: selectedStudio,
             release,
