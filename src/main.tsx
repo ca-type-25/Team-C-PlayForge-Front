@@ -7,6 +7,7 @@ import { StudioProvider } from './contexts/StudioContext.tsx';
 
 
 
+
 createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
