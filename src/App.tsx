@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -42,14 +42,6 @@ import Navbar from './components/NavBar'
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
-        <Link to="/studios">Game Studios</Link>
-        <Link to="/games">Games</Link>
-        <Link to="/articles">Articles</Link>
-
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-      </nav>
 
       <Navbar />
 
@@ -61,6 +53,7 @@ const App: React.FC = () => {
           <Route path="/games/edit/:id" element={<EditGamePage />} />
        
           <Route path="/" element={<h1>Home</h1>} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/games" element={<GamesPage />} />
@@ -97,19 +90,16 @@ const App: React.FC = () => {
             <Route path="/articles/create" element={<CreateArticlePage />} />
             <Route path="/articles/:id/edit" element={<EditArticlePage />} />
             <Route path="/articles/:id" element={<ArticlePage />} />
+
+            <Route path="/genres" element={<GenresPage />} />
+            <Route path="/genres/:id" element={<GenrePage />} />
+            <Route path="/genres/create" element={<CreateGenrePage />} />
+            <Route path="/genres/edit/:id" element={<EditGenrePage />} />
+
         </Routes>
       </ArticleProvider>
 
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-
-        <Route path="/genres" element={<GenresPage />} />
-        <Route path="/genres/:id" element={<GenrePage />} />
-        <Route path="/genres/create" element={<CreateGenrePage />} />
-        <Route path="/genres/edit/:id" element={<EditGenrePage />} />
 
         <Route path="/games/create" element={
           <AdminRoute>
