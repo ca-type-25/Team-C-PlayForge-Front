@@ -2,6 +2,11 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router"
 import api from "../api"
 
+interface Genre {
+    _id: string,
+    title:string
+}
+
 interface Game {
     _id: string
     title: string
@@ -11,13 +16,15 @@ interface Game {
     cover: string
     video: string
     rating: number
-    genres: string[]
+    genres: Genre[]
 }
+
 
 const GamesPage = () => {
     const [games, setGames] = useState<Game[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<Error | null>(null)
+
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -50,13 +57,19 @@ const GamesPage = () => {
     return (
         <div>
             <h1>Games</h1>
-            <ul>
-                {games.map(game => (
-                    <li key={game._id}>
-                        <Link to={`/games/${game._id}`}>{game.title}</Link>
-                    </li>
-                ))}
-            </ul>
+            {games.map(game => {
+                return (
+                    <div key={game._id}>
+                        <img src={game.cover} alt={game.title} style={{width: "200px", height: "200px", objectFit: "cover"}} />
+                        <div>
+                            <Link to={`/games/${game._id}`}>{game.title}</Link>
+                            <p>Rating: {game.rating}</p>
+                            <p>Genre: {game.genres.map(genre => genre.title).join(', ')}</p>
+                            <span>{game.release}</span>
+                        </div>
+                    </div>
+                )
+            })}
             <button><Link to='/games/create'>Add new game</Link></button>
         </div>
     )

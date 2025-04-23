@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -21,10 +21,14 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
+
+import GenresPage from './pages/GenresPage'
+import GenrePage from './pages/GenrePage'
+import CreateGenrePage from './pages/CreateGenrePage'
+import EditGenrePage from './pages/EditGenrePage'
+
 import { ArticleProvider } from './contexts/ArticleContext';
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import AdminRoute from './components/AdminRoute'
+
 import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
 import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
 import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
@@ -82,6 +86,7 @@ const App: React.FC = () => {
         <Route path="/subjects/:id/edit" element={<EditSubjectPage />} />
         <Route path="/subjects/:id" element={<SubjectPage />} />
 
+
           <Route path="/comments" element={<CommentsPage />} />
           <Route path="/comments:id" element={<CommentPage />} />
           <Route path="/comments/create" element={<CreateCommentPage />} />
@@ -106,6 +111,11 @@ const App: React.FC = () => {
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
+          <Route path="/genres" element={<GenresPage />} />
+          <Route path="/genres/:id" element={<GenrePage />} />
+          <Route path="/genres/create" element={<CreateGenrePage />} />
+          <Route path="/genres/edit/:id" element={<EditGenrePage />} />
 
 
         </Route>

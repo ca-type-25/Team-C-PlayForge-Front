@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import GameForm from "../components/GameForm"
+import GameForm from "../components/gameComponents/GameForm";
 
 
 function CreateGamePage() {
