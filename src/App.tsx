@@ -1,6 +1,4 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
 import CreateGamePage from './pages/CreateGamePage'
@@ -21,14 +19,11 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
-
 import GenresPage from './pages/GenresPage'
 import GenrePage from './pages/GenrePage'
 import CreateGenrePage from './pages/CreateGenrePage'
 import EditGenrePage from './pages/EditGenrePage'
-
 import { ArticleProvider } from './contexts/ArticleContext';
-
 import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
 import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
 import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
@@ -38,21 +33,17 @@ import RegisterPage from './pages/RegisterPage'
 import AdminRoute from './components/AdminRoute'
 import Navbar from './components/NavBar'
 
-
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-
       <Navbar />
-
       <ArticleProvider>
         <Routes>
-       
+        
           <Route path="/" element={<h1>Home</h1>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-
 
           <Route path="/games" element={<GamesPage />} />
           <Route path="/games/:id" element={<GamePage />} />
@@ -70,84 +61,85 @@ const App: React.FC = () => {
           <Route path="/articles/:id" element={<ArticlePage />} />
 
           <Route path="/subjects" element={<SubjectsPage />} />
-          <Route path="/subjects/create" element={<CreateSubjectPage />} />
-
-          <Route path="/subjects/:id/edit" element={<EditSubjectPage />} />
           <Route path="/subjects/:id" element={<SubjectPage />} />
 
-
-          <Route path="/comments" element={<CommentsPage />} />
-          <Route path="/comments:id" element={<CommentPage />} />
-          <Route path="/comments/create" element={<CreateCommentPage />} />
-          <Route path="/comments/edit/:id" element={<EditCommentPage />} />
-          
-          <Route path="/studios" element={<GameStudios />} />
-          <Route path="/studios/:id" element={<StudioDetail />} />
-          
-          <Route path="/studios/create" element={<CreateStudio />} />
-          <Route path="/studios/:id/edit" element={<EditStudio />} />
-          
           <Route path="/genres" element={<GenresPage />} />
           <Route path="/genres/:id" element={<GenrePage />} />
-          <Route path="/genres/create" element={<CreateGenrePage />} />
-          <Route path="/genres/edit/:id" element={<EditGenrePage />} />
 
-
+          {/* Admin-Only Routes */}
           <Route path="/games/create" element={
-          <AdminRoute>
-            <CreateGamePage />
-          </AdminRoute>
-        } />
-        <Route path="/games/edit/:id" element={
-          <AdminRoute>
-            <EditGamePage />
-          </AdminRoute>
-        } />
-        <Route path="/reviews/create" element={
-          <AdminRoute>
-            <CreateReviewPage />
-          </AdminRoute>
-        } />
-        <Route path="/reviews/edit/:id" element={
-          <AdminRoute>
-            <EditReviewPage />
-          </AdminRoute>
-        } />
-        <Route path="/comments/create" element={
-          <AdminRoute>
-            <CreateCommentPage />
-          </AdminRoute>
-        } />
-        <Route path="/comments/edit/:id" element={
-          <AdminRoute>
-            <EditCommentPage />
-          </AdminRoute>
-        } />
-        <Route path="/studios/create" element={
-          <AdminRoute>
-            <CreateStudio />
-          </AdminRoute>
-        } />
-        <Route path="/studios/:id/edit" element={
-          <AdminRoute>
-            <EditStudio />
-          </AdminRoute>
-        } />
-        <Route path="/articles/create" element={
-          <AdminRoute>
-            <CreateArticlePage />
-          </AdminRoute>
-        } />
-        <Route path="/articles/:id/edit" element={
-          <AdminRoute>
-            <EditArticlePage />
-          </AdminRoute>
-        } />
-
+            <AdminRoute>
+              <CreateGamePage />
+            </AdminRoute>
+          } />
+          <Route path="/games/edit/:id" element={
+            <AdminRoute>
+              <EditGamePage />
+            </AdminRoute>
+          } />
+          <Route path="/reviews/create" element={
+            <AdminRoute>
+              <CreateReviewPage />
+            </AdminRoute>
+          } />
+          <Route path="/reviews/edit/:id" element={
+            <AdminRoute>
+              <EditReviewPage />
+            </AdminRoute>
+          } />
+          <Route path="/comments/create" element={
+            <AdminRoute>
+              <CreateCommentPage />
+            </AdminRoute>
+          } />
+          <Route path="/comments/edit/:id" element={
+            <AdminRoute>
+              <EditCommentPage />
+            </AdminRoute>
+          } />
+          <Route path="/studios/create" element={
+            <AdminRoute>
+              <CreateStudio />
+            </AdminRoute>
+          } />
+          <Route path="/studios/:id/edit" element={
+            <AdminRoute>
+              <EditStudio />
+            </AdminRoute>
+          } />
+          <Route path="/articles/create" element={
+            <AdminRoute>
+              <CreateArticlePage />
+            </AdminRoute>
+          } />
+          <Route path="/articles/:id/edit" element={
+            <AdminRoute>
+              <EditArticlePage />
+            </AdminRoute>
+          } />
+          <Route path="/genres/create" element={
+            <AdminRoute>
+              <CreateGenrePage />
+            </AdminRoute>
+          } />
+          <Route path="/genres/edit/:id" element={
+            <AdminRoute>
+              <EditGenrePage />
+            </AdminRoute>
+          } />
+          <Route path="/subjects/create" element={
+            <AdminRoute>
+              <CreateSubjectPage />
+            </AdminRoute>
+          } />
+          <Route path="/subjects/:id/edit" element={
+            <AdminRoute>
+              <EditSubjectPage />
+            </AdminRoute>
+          } />
         </Routes>
       </ArticleProvider>
     </BrowserRouter>
-  
   )
 }
 
