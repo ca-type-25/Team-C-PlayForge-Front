@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Link } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -49,6 +49,8 @@ const App: React.FC = () => {
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:id" element={<ArticlePage />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="/subjects" element={<SubjectsPage />} />
+        <Route path="/subjects/:id" element={<SubjectPage />} />
 
      
         <Route path="/games/create" element={
@@ -99,6 +101,16 @@ const App: React.FC = () => {
         <Route path="/articles/:id/edit" element={
           <AdminRoute>
             <EditArticlePage />
+          </AdminRoute>
+        } />
+        <Route path="/subjects/create" element={
+          <AdminRoute>
+            <CreateSubjectPage />
+          </AdminRoute>
+        } />
+        <Route path="/subjects/:id/edit" element={
+          <AdminRoute>
+            <EditSubjectPage />
           </AdminRoute>
         } />
       </Routes>
