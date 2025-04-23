@@ -1,50 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router';
+
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { getAllArticles } from '../../api/articlesApi';
+import { useArticle } from '../../contexts/ArticleContext';
 
 
-interface Article {
-  _id: string;
-  title: string;
-  content: string;
-  image?: string;
-  video?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
 
 const ArticlesList: React.FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { articles, setArticles, isLoading, setIsLoading, error, setError } = useArticle();
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
+        setIsLoading(true);
         const articlesData = await getAllArticles();
-        console.log("Fetched articles data:", articlesData);
-        
-      
-        articlesData.forEach((article: Article) => {
-          if (typeof article._id !== 'string' || article._id.length !== 24 || !/^[0-9a-fA-F]+$/.test(article._id)) {
-            console.warn(`Invalid _id found: ${article._id} for article titled: ${article.title}`);
-          }
-        });
-        
         setArticles(articlesData);
+        setError(null);
       } catch (err) {
         setError('Failed to fetch articles');
+        setArticles([]);
         console.error('Error fetching articles:', err);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchArticles();
-  }, []);
+    
+    return () => {
+      setArticles([]);
+      setError(null);
+    };
+  }, [setArticles, setError, setIsLoading]);
 
-  if (loading) {
+  if (isLoading) {
     return <div className="text-center mt-5">Loading articles...</div>;
   }
 
@@ -93,7 +85,7 @@ const ArticlesList: React.FC = () => {
                 </Card.Body>
                 <Card.Footer className="bg-white">
                   <small className="text-muted">
-                    Published on {new Date(article.createdAt).toLocaleDateString()}
+                    Published on {article.createdAt ? new Date(article.createdAt).toLocaleDateString() : 'Unknown date'}
                   </small>
                   <Link 
                     to={`/articles/${article._id}`} 
