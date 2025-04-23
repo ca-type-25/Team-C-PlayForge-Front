@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -59,6 +59,11 @@ const App: React.FC = () => {
         <Route path="/subjects/create" element={<CreateSubjectPage />} />
         <Route path="/subjects/:id/edit" element={<EditSubjectPage />} />
         <Route path="/subjects/:id" element={<SubjectPage />} />
+
+        <Route path="/genres" element={<GenresPage />} />
+        <Route path="/genres/:id" element={<GenrePage />} />
+        <Route path="/genres/create" element={<CreateGenrePage />} />
+        <Route path="/genres/edit/:id" element={<EditGenrePage />} />
 
      
         <Route path="/games/create" element={
