@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Link } from 'react-router'
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -22,7 +22,10 @@ import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
-import AdminRoute from './components/AdminRoute'
+import TopicsPage from './pages/TopicsPage/TopicsPage'
+import TopicPage from './pages/TopicPage/TopicPage'
+import CreateTopicPage from './pages/CreateTopicPage/CreateTopicPage'
+import EditTopicPage from './pages/EditTopicPage/EditTopicPage'
 
 
 
@@ -34,6 +37,7 @@ const App: React.FC = () => {
         <Link to="/studios">Game Studios</Link>
         <Link to="/games">Games</Link>
         <Link to="/articles">Articles</Link>
+        <Link to="/topics">Topics</Link>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
         
@@ -57,15 +61,18 @@ const App: React.FC = () => {
           
           <Route path="/studios" element={<GameStudios />} />
           <Route path="/studios/:id" element={<StudioDetail />} />
-          
           <Route path="/studios/create" element={<CreateStudio />} />
-          
           <Route path="/studios/:id/edit" element={<EditStudio />} />
           
           <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/articles/create" element={<CreateArticlePage />} />
           <Route path="/articles/:id/edit" element={<EditArticlePage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />
+
+          <Route path="/topics" element={<TopicsPage />} />
+          <Route path="/topics/:id" element={<TopicPage />} />
+          <Route path="/topics/create" element={<CreateTopicPage />} />
+          <Route path="/topics/:id/edit" element={<EditTopicPage />} />
 
           <Route path="/" element={<h1>Home</h1>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
