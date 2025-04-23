@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Link } from 'react-router'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -20,6 +20,10 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
+import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
+import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
+import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
+import SubjectPage from './pages/SubjectPage/SubjectPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AdminRoute from './components/AdminRoute'
