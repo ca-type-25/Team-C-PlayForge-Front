@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 
 import GamesPage from './pages/GamesPage'
 import GamePage from './pages/GamePage'
@@ -20,6 +21,10 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
+import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
+import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
+import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
+import SubjectPage from './pages/SubjectPage/SubjectPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AdminRoute from './components/AdminRoute'
@@ -45,6 +50,11 @@ const App: React.FC = () => {
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:id" element={<ArticlePage />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
+
+        <Route path="/subjects" element={<SubjectsPage />} />
+        <Route path="/subjects/create" element={<CreateSubjectPage />} />
+        <Route path="/subjects/:id/edit" element={<EditSubjectPage />} />
+        <Route path="/subjects/:id" element={<SubjectPage />} />
 
      
         <Route path="/games/create" element={
