@@ -64,3 +64,28 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const loginUser = async (credentials: { username: string; password: string }) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/users/login`, credentials);
+    
+    if (response.data.token) {
+      localStorage.setItem('authToken', response.data.token);
+    }
+    
+    return response.data;
+  } catch (error) {
+    console.error('Login failed:', error);
+    throw error;
+  }
+};
+
+export const registerUser = async (userData: { username: string; email: string; password: string }) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/users/register`, userData);
+    return response.data;
+  } catch (error) {
+    console.error('Registration failed:', error);
+    throw error;
+  }
+};

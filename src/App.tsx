@@ -12,14 +12,23 @@ import CommentsPage from './pages/CommentsPage'
 import CommentPage from './pages/CommentPage'
 import CreateCommentPage from './pages/createCommentPage'
 import EditCommentPage from './pages/EditCommentPage'
-import GameStudios from './pages/GameStudios';
-import StudioDetail from './pages/StudioDetail';
-import CreateStudio from './pages/CreateStudio';
-import EditStudio from './pages/EditStudio';
+import GameStudios from './pages/Studios/GameStudios';
+import StudioDetail from './pages/Studios/StudioDetail';
+import CreateStudio from './pages/Studios/CreateStudio';
+import EditStudio from './pages/Studios/EditStudio';
 import ArticlePage from './pages/ArticlePage/ArticlePage'; 
 import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
 import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
+import GenresPage from './pages/GenresPage'
+import GenrePage from './pages/GenrePage'
+import CreateGenrePage from './pages/CreateGenrePage'
+import EditGenrePage from './pages/EditGenrePage'
+import { ArticleProvider } from './contexts/ArticleContext';
+import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
+import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
+import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
+import SubjectPage from './pages/SubjectPage/SubjectPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import TopicsPage from './pages/TopicsPage/TopicsPage'
@@ -46,27 +55,19 @@ const App: React.FC = () => {
         <Route>
           <Route path="/games" element={<GamesPage />} />
           <Route path="/games/:id" element={<GamePage />} />
-          <Route path="/games/create" element={<CreateGamePage />} />
-          <Route path="/games/edit/:id" element={<EditGamePage />} />
 
           <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/reviews/:id" element={<ReviewPage />} />
-          <Route path="/reviews/create" element={<CreateReviewPage />} />
-          <Route path="/reviews/edit/:id" element={<EditReviewPage />} />
 
           <Route path="/comments" element={<CommentsPage />} />
-          <Route path="/comments:id" element={<CommentPage />} />
-          <Route path="/comments/create" element={<CreateCommentPage />} />
-          <Route path="/comments/edit/:id" element={<EditCommentPage />} />
-          
+          <Route path="/comments/:id" element={<CommentPage />} />
+
           <Route path="/studios" element={<GameStudios />} />
           <Route path="/studios/:id" element={<StudioDetail />} />
           <Route path="/studios/create" element={<CreateStudio />} />
           <Route path="/studios/:id/edit" element={<EditStudio />} />
           
           <Route path="/articles" element={<ArticlesPage />} />
-          <Route path="/articles/create" element={<CreateArticlePage />} />
-          <Route path="/articles/:id/edit" element={<EditArticlePage />} />
           <Route path="/articles/:id" element={<ArticlePage />} />
 
           <Route path="/topics" element={<TopicsPage />} />
@@ -85,6 +86,5 @@ const App: React.FC = () => {
     </BrowserRouter>
   )
 }
-
 
 export default App;

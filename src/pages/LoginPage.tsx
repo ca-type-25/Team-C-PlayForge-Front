@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../contexts/AuthContext'; // <-- adjust path if needed
+import { loginUser } from '../contexts/AuthContext'; 
 import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
@@ -14,15 +14,19 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     setError(null);
     try {
-      const token = await loginUser(email, password); // token is a string!
+      const token = await loginUser(email, password);
       if (!token) {
         setError('No token received from server');
         return;
       }
-      login(token); // Save to localStorage and update context
+      login(token);
       navigate('/');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed');
+    } catch (err: unknown) {
+      if (err instanceof Error && err.message) {
+        setError(err.message);
+      } else {
+        setError('Login failed');
+      }
     }
   };
 

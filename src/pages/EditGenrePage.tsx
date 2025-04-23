@@ -1,36 +1,29 @@
 import { useEffect, useState } from "react";
-import GameForm from "../components/gameComponents/GameForm";
 import api from "../api";
 import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
+import GenreForm from "../components/genreComponents/GenreForm";
 
-type GameFormProps = {
-    editGameData?: {
+
+type GenreFormProps = {
+    editGenreData?: {
         _id: string,
         title: string,
-        cover: string,
-        genre: string[],
-        description: string,
-        studio: string,
-        release: string,
-        video: string,
+        description: string
     }
-
 }
 
-function EditGamePage() {
-    const [game, setGame] = useState<GameFormProps["editGameData"] | null>(null)
+function EditGenrePage() {
+    const [genre, setGenre] = useState<GenreFormProps["editGenreData"] | null>(null)
     const [error, setError] = useState('')
 
     const { id } = useParams()
 
     useEffect(() => {
         const fetchData = async () => {
-            
-
             try {
-                const { data } = await api.get(`/games/${id}`)
-                setGame(data)
+                const { data } = await api.get(`/genres/${id}`)
+                setGenre(data)
             } catch (error) {
                 if (error instanceof AxiosError) {
                     console.log(error)
@@ -48,19 +41,19 @@ function EditGamePage() {
         return <p>{error}</p>
     }
 
-    if (!game) {
+    if (!genre) {
         return "Loading..."
     }
 
     return (
         <div>
-            <h1>Edit Game: {game.title}</h1>
+            <h1>Edit genre: {genre.title}</h1>
             
-            <GameForm editGameData={game}/>
+            <GenreForm editGenreData={genre}/>
 
-            <button><Link to={`/games`}>Back to games list</Link></button>
+            <button><Link to={`/genres`}>Back to genres list</Link></button>
         </div>
     )
 }
 
-export default EditGamePage
+export default EditGenrePage

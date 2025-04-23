@@ -1,58 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container, Card } from 'react-bootstrap';
 import { getArticleById } from '../../api/articlesApi';
-import axios from 'axios';
+import { useArticle } from '../../contexts/ArticleContext';
 
 
-interface Article {
-  _id: string;
-  title: string;
-  content: string;
-  image?: string;
-  video?: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
 
 const SingleArticleDisplay: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { article, setArticle, isLoading, setIsLoading, error, setError } = useArticle();
 
   useEffect(() => {
     const fetchArticle = async () => {
       if (!id) {
         setError('Article ID is missing.');
-        setLoading(false);
+        setIsLoading(false);
         return;
       }
       try {
-        console.log(`Fetching article with ID: ${id}`);
+        setIsLoading(true);
         const articleData = await getArticleById(id);
-        console.log("API Response Data:", articleData);
         setArticle(articleData);
+        setError(null);
       } catch (err: unknown) { 
         console.error('Error fetching article:', err); 
-
-        let message = 'Failed to fetch article'; 
-        if (axios.isAxiosError(err)) { 
-            message = err.response?.data?.message || err.message;
-        } else if (err instanceof Error) { 
-            message = err.message;
-        }
-
-        setError(message);
+        setError('Failed to fetch article');
+        setArticle(null);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchArticle();
-  }, [id]);
+    
+    return () => {
+      setArticle(null);
+      setError(null);
+    };
+  }, [id, setArticle, setError, setIsLoading]);
 
-  if (loading) {
+  if (isLoading) {
     return <div className="text-center mt-5">Loading article...</div>;
   }
 
@@ -86,7 +74,7 @@ const SingleArticleDisplay: React.FC = () => {
           
           <div className="mb-4">
             <small className="text-muted">
-              Published on {new Date(article.createdAt).toLocaleDateString()}
+              Published on {article.createdAt ? new Date(article.createdAt).toLocaleDateString() : 'Unknown date'}
             </small>
           </div>
           

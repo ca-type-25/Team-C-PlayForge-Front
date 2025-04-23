@@ -3,11 +3,11 @@ import { jwtDecode } from 'jwt-decode';
 import api from '../api';
 import { JwtPayload, AuthContextType } from '../types/login';
 
-// --- API Calls & Helpers ---
+
 
 export const loginUser = async (email: string, password: string) => {
   const res = await api.post('users/login', { email, password });
-  return res.data.token; // Returns only the token string
+  return res.data.token; 
 };
 
 export const registerUser = async (username: string, email: string, password: string) => {
@@ -25,7 +25,7 @@ export function getCurrentUser(): JwtPayload | null {
   }
 }
 
-// --- Auth Context ---
+
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
   };
 
-  // Case-insensitive check for admin role
+  //check for admin role
   const isAdmin = user?.role?.toLowerCase() === 'admin';
 
   return (

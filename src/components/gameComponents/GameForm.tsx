@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import api from "../api"
+import api from "../../api"
 import { useEffect, useState } from "react"
 
 type Genre = {
@@ -88,7 +88,7 @@ function GameForm(props: GameFormProps) {
         const newGame = {
             title,
             cover,
-            genre: [selectedGenre],
+            genres: [selectedGenre],
             description,
             studio: selectedStudio,
             release,
