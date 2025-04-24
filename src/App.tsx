@@ -97,52 +97,52 @@ const App: React.FC = () => {
           <AdminRoute>
             <CreateGamePage />
           </AdminRoute>
-        } />
-        <Route path="/games/edit/:id" element={
-          <AdminRoute>
-            <EditGamePage />
-          </AdminRoute>
-        } />
-        <Route path="/reviews/create" element={
-          <AdminRoute>
-            <CreateReviewPage />
-          </AdminRoute>
-        } />
-        <Route path="/reviews/edit/:id" element={
-          <AdminRoute>
-            <EditReviewPage />
-          </AdminRoute>
-        } />
-        <Route path="/comments/create" element={
-          <AdminRoute>
-            <CreateCommentPage />
-          </AdminRoute>
-        } />
-        <Route path="/comments/edit/:id" element={
-          <AdminRoute>
-            <EditCommentPage />
-          </AdminRoute>
-        } />
-        <Route path="/studios/create" element={
-          <AdminRoute>
-            <CreateStudio />
-          </AdminRoute>
-        } />
-        <Route path="/studios/:id/edit" element={
-          <AdminRoute>
-            <EditStudio />
-          </AdminRoute>
-        } />
-        <Route path="/articles/create" element={
-          <AdminRoute>
-            <CreateArticlePage />
-          </AdminRoute>
-        } />
-        <Route path="/articles/:id/edit" element={
-          <AdminRoute>
-            <EditArticlePage />
-          </AdminRoute>
-        } />
+          } />
+          <Route path="/games/edit/:id" element={
+            <AdminRoute>
+              <EditGamePage />
+            </AdminRoute>
+          } />
+          <Route path="/reviews/create" element={
+            <AdminRoute>
+              <CreateReviewPage />
+            </AdminRoute>
+          } />
+          <Route path="/reviews/edit/:id" element={
+            <AdminRoute>
+              <EditReviewPage />
+            </AdminRoute>
+          } />
+          <Route path="/comments/create" element={
+            <AdminRoute>
+              <CreateCommentPage />
+            </AdminRoute>
+          } />
+          <Route path="/comments/edit/:id" element={
+            <AdminRoute>
+              <EditCommentPage />
+            </AdminRoute>
+          } />
+          <Route path="/studios/create" element={
+            <AdminRoute>
+              <CreateStudio />
+            </AdminRoute>
+          } />
+          <Route path="/studios/:id/edit" element={
+            <AdminRoute>
+              <EditStudio />
+            </AdminRoute>
+          } />
+          <Route path="/articles/create" element={
+            <AdminRoute>
+              <CreateArticlePage />
+            </AdminRoute>
+          } />
+          <Route path="/articles/:id/edit" element={
+            <AdminRoute>
+              <EditArticlePage />
+            </AdminRoute>
+          } />
 
         </Routes>
       </ArticleProvider>
