@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
       <Link to="/articles">Articles</Link>
       <Link to="/login">Login</Link>
       <Link to="/register">Register</Link>
+      <Link to="/users">Users</Link>
       {user ? (
         <>
           <span>Welcome, {user.username}</span>

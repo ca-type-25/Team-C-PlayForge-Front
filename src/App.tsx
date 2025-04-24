@@ -28,10 +28,14 @@ import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
 import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
 import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
 import SubjectPage from './pages/SubjectPage/SubjectPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
+import LoginPage from './pages/Users/LoginPage'
+import RegisterPage from './pages/Users/RegisterPage'
 import AdminRoute from './components/AdminRoute'
 import Navbar from './components/NavBar'
+import UserList from './components/Users/UserList'
+import UserForm from './components/Users/UserForm'
+import UserPage from './pages/Users/UserPage'
+
 
 const App: React.FC = () => {
   return (
@@ -65,6 +69,13 @@ const App: React.FC = () => {
 
           <Route path="/genres" element={<GenresPage />} />
           <Route path="/genres/:id" element={<GenrePage />} />
+
+          
+          <Route path="/users" element={<UserList />} />
+          <Route path="/users/:id" element={<UserPage />} />
+          <Route path="/edit/:id" element={<UserForm />} />
+
+
 
           {/* Admin-Only Routes */}
           <Route path="/games/create" element={
