@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import api from "../api";
+import api from "../../api"
 import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
-import CommentForm from "../components/CommentForm";
+import CommentForm from "../../components/CommentForm";
 
 
 type CommentFormProps = {
@@ -55,7 +55,7 @@ function EditCommentPage() {
             
             <CommentForm editCommentData={comment}/>
 
-            <button><Link to={`/comments`}>Back to comments list</Link></button>
+            <Link to={`/comments`}>Back to comments list</Link>
         </div>
     )
 }

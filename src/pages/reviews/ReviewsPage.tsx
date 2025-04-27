@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import api from "../api"
+import api from "../../api"
 import { Link } from "react-router"
 
 interface Game {
     _id: string,
+    title: string,
     cover: string
 }
 
@@ -11,8 +12,11 @@ interface Review {
     _id: string,
     rating: number,
     feedback: string,
-    username: string,
-    game: string
+    user: string,
+    game: {
+        _id: string,
+        title: string
+    }
 }
 
 const ReviewsPage = () => {
@@ -26,6 +30,9 @@ const ReviewsPage = () => {
             try {
                 const { data } = await api.get('/reviews')
                 const gamesResponse = await api.get(`/games`)
+
+                console.log("Fetched reviews:", data); // Debugging
+                console.log("Fetched games:", gamesResponse.data); // Debugging
 
                 setReviews(data)
                 setGames(gamesResponse.data)
@@ -56,19 +63,19 @@ const ReviewsPage = () => {
         <div>
             <h1>Reviews</h1>
             {reviews.map(review => {
-                const game = games.find(game => game._id === review.game)
+                const game = games.find(game => game._id === review.game._id)
                 return (
                     <div key={review._id}>
                         <Link to={`/reviews/${review._id}`}>
-                            User: {review.username}
                             {game?.cover && (
                                 <img src={game.cover} alt="Game Cover" style={{width: '80px', height: '80px'}} />
                             )}
+                            Game: {game?.title || "Unknown Game"}
                         </Link>
                     </div>
                 )
             })}
-            <button><Link to='/reviews/create'>Add new review</Link></button>
+            <Link to='/reviews/create'>Add new review</Link>
         </div>
     )
 }

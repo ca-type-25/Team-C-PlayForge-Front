@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router"
-import api from "../api"
+import api from "../../api"
 
-interface Topic {
-    _id: string, 
-    title: string
+interface User {
+    _id: string;
+    name: string;
 }
 
 interface Comment {
     _id: string,
     message: string,
     picture: string,
-    topics: Topic[],
-    user: string[]
+    topic: string | { _id: string; title: string }
+    user: User 
 }
 
 const CommentPage = () => {
@@ -63,14 +63,14 @@ const CommentPage = () => {
     return (
         <div>
             <h1>Comment:</h1>
-            <img src={comment.picture} alt="Comment picture" />
+            <img src={comment.picture} alt="Comment picture" style={{width: '80px', height: '80px'}}/>
             <p>{comment.message}</p>
-            <p>Topic: {comment.topics.map(topic => topic.title).join(', ')}</p>
-            <p>User: {comment.user}</p>
-            <button><Link to={`/comments/edit/${comment._id}`}>Edit comment</Link></button>
+            <p>Topic: {typeof comment.topic === "object" ? comment.topic.title : comment.topic}</p>
+            <p>User: {typeof comment.user === "object" ? comment.user.name : comment.user}</p>
+            <Link to={`/comments/edit/${comment._id}`}>Edit comment</Link>
             <button onClick={deleteHandler}>Delete</button>
-            <button><Link to={`/comments`}>Back to comments list</Link></button>
-            <button><Link to={`/comments/create`}>Add comment</Link></button>
+            <Link to={`/comments`}>Back to comments list</Link>
+            <Link to={`/comments/create`}>Add comment</Link>
         </div>
     )
 }

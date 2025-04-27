@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import api from "../api"
+import api from "../../api"
 import { Link, useNavigate, useParams } from "react-router"
 
 interface Genre {
@@ -62,7 +62,7 @@ const GenrePage = () => {
 
             <button><Link to={`/genres/edit/${genre._id}`}>Edit genre</Link></button>
             <button onClick={deleteHandler}>Delete</button>
-            <button><Link to={`/genres`}>Back to genres list</Link></button>
+            <Link to={`/genres`}>Back to genres list</Link>
         </div>
     )
 }

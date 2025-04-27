@@ -1,37 +1,38 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import GamesPage from './pages/GamesPage'
-import GamePage from './pages/GamePage'
-import CreateGamePage from './pages/CreateGamePage'
-import EditGamePage from './pages/EditGamePage'
-import ReviewsPage from './pages/ReviewsPage'
-import ReviewPage from './pages/ReviewPage'
-import CreateReviewPage from './pages/CreateReviewPage'
-import EditReviewPage from './pages/EditReviewPage'
-import CommentsPage from './pages/CommentsPage'
-import CommentPage from './pages/CommentPage'
-import CreateCommentPage from './pages/createCommentPage'
-import EditCommentPage from './pages/EditCommentPage'
+import GamesPage from './pages/games/GamesPage'
+import GamePage from './pages/games/GamePage'
+import CreateGamePage from './pages/games/CreateGamePage'
+import EditGamePage from './pages/games/EditGamePage'
+import ReviewsPage from './pages/reviews/ReviewsPage'
+import ReviewPage from './pages/reviews/ReviewPage'
+import CreateReviewPage from './pages/reviews/CreateReviewPage'
+import EditReviewPage from './pages/reviews/EditReviewPage'
+import CommentsPage from './pages/comments/CommentsPage'
+import CommentPage from './pages/comments/CommentPage'
+import CreateCommentPage from './pages/comments/createCommentPage'
+import EditCommentPage from './pages/comments/EditCommentPage'
 import GameStudios from './pages/Studios/GameStudios';
 import StudioDetail from './pages/Studios/StudioDetail';
 import CreateStudio from './pages/Studios/CreateStudio';
 import EditStudio from './pages/Studios/EditStudio';
-import ArticlePage from './pages/ArticlePage/ArticlePage'; 
-import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
-import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
-import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
-import GenresPage from './pages/GenresPage'
-import GenrePage from './pages/GenrePage'
-import CreateGenrePage from './pages/CreateGenrePage'
-import EditGenrePage from './pages/EditGenrePage'
+import ArticlePage from './pages/articles/ArticlePage'; 
+import ArticlesPage from './pages/articles/ArticlesPage'; 
+import CreateArticlePage from './pages/articles/CreateArticlePage/CreateArticlePage';
+import EditArticlePage from './pages/articles/EditArticlePage';
+import GenresPage from './pages/genres/GenresPage'
+import GenrePage from './pages/genres/GenrePage'
+import CreateGenrePage from './pages/genres/CreateGenrePage'
+import EditGenrePage from './pages/genres/EditGenrePage'
 import { ArticleProvider } from './contexts/ArticleContext';
-import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
-import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
-import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
-import SubjectPage from './pages/SubjectPage/SubjectPage'
+import SubjectsPage from './pages/subjects/SubjectsPage'
+import CreateSubjectPage from './pages/subjects/CreateSubjectPage'
+import EditSubjectPage from './pages/subjects/EditSubjectPage'
+import SubjectPage from './pages/subjects/SubjectPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import AdminRoute from './components/AdminRoute'
 import Navbar from './components/NavBar'
+import { GamesProvider } from './contexts/GamePageContext'
 
 const App: React.FC = () => {
   return (
@@ -44,12 +45,24 @@ const App: React.FC = () => {
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-
-          <Route path="/games" element={<GamesPage />} />
-          <Route path="/games/:id" element={<GamePage />} />
+          
+          <Route path="/games" element={
+            <GamesProvider>
+              <GamesPage />
+            </GamesProvider>
+          } />
+          <Route path="/games/:id" element={
+            <GamesProvider>
+              <GamePage />
+            </GamesProvider>
+          } />
 
           <Route path="/reviews" element={<ReviewsPage />} />
-          <Route path="/reviews/:id" element={<ReviewPage />} />
+          <Route path="/reviews/:id" element={
+            <GamesProvider>
+              <ReviewPage />
+            </GamesProvider>
+          } />
 
           <Route path="/comments" element={<CommentsPage />} />
           <Route path="/comments/:id" element={<CommentPage />} />
