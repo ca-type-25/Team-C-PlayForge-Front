@@ -15,6 +15,15 @@ import GameStudios from './pages/Studios/GameStudios';
 import StudioDetail from './pages/Studios/StudioDetail';
 import CreateStudio from './pages/Studios/CreateStudio';
 import EditStudio from './pages/Studios/EditStudio';
+import ArticlePage from './pages/ArticlePage/ArticlePage'; 
+import ArticlesPage from './pages/ArticlesPage/ArticlesPage'; 
+import CreateArticlePage from './pages/CreateArticlePage/CreateArticlePage';
+import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
+import HomePage from './pages/HomePage';
+import GenresPage from './pages/GenresPage'
+import GenrePage from './pages/GenrePage'
+import CreateGenrePage from './pages/CreateGenrePage'
+import EditGenrePage from './pages/EditGenrePage'
 import ArticlePage from './pages/articles/ArticlePage'; 
 import ArticlesPage from './pages/articles/ArticlesPage'; 
 import CreateArticlePage from './pages/articles/CreateArticlePage/CreateArticlePage';
@@ -48,7 +57,7 @@ const App: React.FC = () => {
       <ArticleProvider>
         <Routes>
         
-          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="/" element={<HomePage />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
