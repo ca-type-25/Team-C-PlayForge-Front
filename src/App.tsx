@@ -30,6 +30,13 @@ import EditSubjectPage from './pages/subjects/EditSubjectPage'
 import SubjectPage from './pages/subjects/SubjectPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import TopicsPage from './pages/TopicsPage/TopicsPage'
+import TopicPage from './pages/TopicPage/TopicPage'
+import CreateTopicPage from './pages/CreateTopicPage/CreateTopicPage'
+import EditTopicPage from './pages/EditTopicPage/EditTopicPage'
+
+
+
 import AdminRoute from './components/AdminRoute'
 import Navbar from './components/NavBar'
 import { GamesProvider } from './contexts/GamePageContext'
@@ -78,6 +85,9 @@ const App: React.FC = () => {
 
           <Route path="/genres" element={<GenresPage />} />
           <Route path="/genres/:id" element={<GenrePage />} />
+
+          <Route path="/topics" element={<TopicsPage />} />
+          <Route path="/topics/:id" element={<TopicPage />} />
 
           {/* Admin-Only Routes */}
           <Route path="/games/create" element={
@@ -150,6 +160,17 @@ const App: React.FC = () => {
               <EditSubjectPage />
             </AdminRoute>
           } />
+          <Route path="/topics/create" element={
+            <AdminRoute>
+              <CreateTopicPage />
+            </AdminRoute>
+          } />
+          <Route path="/topics/:id/edit" element={
+            <AdminRoute>
+              <EditTopicPage />
+            </AdminRoute>
+          } />
+          {/* Remove the extra closing brace below */}
         </Routes>
       </ArticleProvider>
     </BrowserRouter>
