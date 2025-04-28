@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router"
-import api from "../api"
+import api from "../../api"
 
 interface Comment {
     _id: string,
@@ -53,7 +53,7 @@ const CommentsPage = () => {
                     </li>
                 ))}
             </ul>
-            <button><Link to='/comments/create'>Add new comment</Link></button>
+            <Link to='/comments/create'>Add new comment</Link>
         </div>
     )
 }

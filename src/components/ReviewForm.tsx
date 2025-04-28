@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react"
 import api from "../api"
 import { useNavigate } from "react-router"
+import { useLocation } from "react-router"
 
 interface Game {
     _id: string,
     title: string
 }
 
-interface User {
-    _id: string,
-    name: string
-}
 
 type ReviewFormProps = {
     editReviewData?: {
         _id: string,
         rating: number,
         feedback: string,
-        user: string,
         game: string
     }
 }
@@ -28,12 +24,13 @@ function ReviewForm(props: ReviewFormProps) {
 
     const [rating, setRating] = useState('')
     const [feedback, setFeedback] = useState('')
-    const [users, setUsers] = useState<User[]>([])
-    const [selectedUser, setSelectedUser] = useState('')
     const [games, setGames] = useState<Game[]>([])
     const [selectedGame, setSelectedGame] = useState('')
 
     const navigate = useNavigate()
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const gameId = queryParams.get("gameId")
 
     useEffect(() => {
         const fetchGames = async () => {
@@ -48,23 +45,9 @@ function ReviewForm(props: ReviewFormProps) {
 
     }, [])
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const res = await api.get(`/users`)
-            const usersData = res.data
-
-            setUsers(usersData)
-            setSelectedUser(usersData[0].id || '')
-
-        }
-        fetchUsers()
-
-    }, [])
-
 
     const feedbackHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => setFeedback(event.target.value)
     const selectedGameHandler = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedGame(event.target.value)
-    const selectedUserHandler = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedGame(event.target.value)
 
     const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -72,8 +55,7 @@ function ReviewForm(props: ReviewFormProps) {
         const newReview = {
             rating: Number(rating),
             feedback,
-            user: selectedUser,
-            game: selectedGame
+            game: gameId || selectedGame,
         }
 
         if (editReviewData) {
@@ -109,15 +91,6 @@ function ReviewForm(props: ReviewFormProps) {
                 <div className="form-control">
                     <label htmlFor="feedback">Feedback</label>
                     <textarea name="feedback" id="feedback" value={feedback} onChange={feedbackHandler}></textarea>
-                </div>
-                <div className="form-control">
-                    <label htmlFor="user">User</label>
-                    <select value={selectedUser} onChange={selectedUserHandler}>
-                        {users.map(user => (
-                            <option key={user._id} value={user._id}>{user.name}
-                            </option>
-                        ))}
-                    </select>
                 </div>
                 <div className="form-control">
                     <label htmlFor="game">Game</label>

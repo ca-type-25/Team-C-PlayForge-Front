@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import CommentForm from "../components/CommentForm"
+import CommentForm from "../../components/CommentForm"
 
 
 function CreateCommentPage() {
@@ -8,7 +8,7 @@ function CreateCommentPage() {
         <div>
             <h1>Add New Comment</h1>
             <CommentForm />
-            <button><Link to={`/comments`}>Back to comments list</Link></button>
+            <Link to={`/comments`}>Back to comments list</Link>
         </div>
     )
 }

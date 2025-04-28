@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import api from "../api"
+import api from "../../api"
 import { Link } from "react-router"
 
 interface Genre {
@@ -52,7 +52,7 @@ const GenresPage = () => {
                     </div>
                 )
             })}
-            <button><Link to='/genres/create'>Add new genre</Link></button>
+        <Link to='/genres/create'>Add new genre</Link>
         </div>
     )
 }

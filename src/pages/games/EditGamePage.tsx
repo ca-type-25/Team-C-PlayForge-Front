@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import GameForm from "../components/gameComponents/GameForm";
-import api from "../api";
+import GameForm from "../../components/gameComponents/GameForm";
+import api from "../../api";
 import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
 
@@ -58,7 +58,7 @@ function EditGamePage() {
             
             <GameForm editGameData={game}/>
 
-            <button><Link to={`/games`}>Back to games list</Link></button>
+            <Link to={`/games`}>Back to games list</Link>
         </div>
     )
 }
