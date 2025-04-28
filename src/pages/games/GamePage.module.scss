@@ -1,0 +1,77 @@
+body {
+    background-color: rgb(29, 44, 78);
+    color: rgb(184, 184, 184);
+}
+
+.page-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+h2 {
+    color: #3fd4ee;
+    font-size: 30px;
+}
+
+.game-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.video-card {
+    width: 600px;
+    height: 400px;
+    background-color: #ffffff; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.studio-name {
+    text-decoration: none;
+    color: rgb(184, 184, 184);
+}
+
+
+.review-card {
+    background-color: rgb(25, 35, 58);
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.date-posted {
+    color: rgba(128, 128, 128, 0.39);
+}
+
+.rating-stars {
+    background-color: rgb(28, 34, 49);
+    padding: 10px;
+    font-size: 20px;
+    color: #3fd4ee; 
+    display: flex;
+    gap: 2px;
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.edit-button,
+.add-review-button {
+    color: #3fd4ee;
+    background-color: #336872;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.delete-button {
+    color: #3fd4ee;
+    background-color: #336872;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: none;
+}
+    
