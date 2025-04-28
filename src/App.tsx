@@ -40,6 +40,7 @@ import EditTopicPage from './pages/EditTopicPage/EditTopicPage'
 import AdminRoute from './components/AdminRoute'
 import Navbar from './components/NavBar'
 import { GamesProvider } from './contexts/GamePageContext'
+import AdminPanelPage from './pages/adminPanelPage/AdminPanelPage'
 
 const App: React.FC = () => {
   return (
@@ -168,6 +169,11 @@ const App: React.FC = () => {
           <Route path="/topics/:id/edit" element={
             <AdminRoute>
               <EditTopicPage />
+            </AdminRoute>
+          } />
+          <Route path="/admin" element={
+            <AdminRoute>
+              <AdminPanelPage />
             </AdminRoute>
           } />
           {/* Remove the extra closing brace below */}
