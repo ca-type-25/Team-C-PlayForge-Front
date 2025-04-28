@@ -30,22 +30,25 @@ import EditSubjectPage from './pages/subjects/EditSubjectPage'
 import SubjectPage from './pages/subjects/SubjectPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
-import TopicsPage from './pages/TopicsPage/TopicsPage'
-import TopicPage from './pages/TopicPage/TopicPage'
-import CreateTopicPage from './pages/CreateTopicPage/CreateTopicPage'
-import EditTopicPage from './pages/EditTopicPage/EditTopicPage'
+import TopicsPage from './pages/topics/TopicsPage'
+
+import CreateTopicPage from './pages/topics/CreateTopicPage'
+import EditTopicPage from './pages/topics/EditTopicPage'
 
 
 
 import AdminRoute from './components/AdminRoute'
 import Navbar from './components/NavBar'
 import { GamesProvider } from './contexts/GamePageContext'
+import TopicPage from './pages/topics/TopicPage'
+import { TopicProvider } from './contexts/TopicContext'
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Navbar />
       <ArticleProvider>
+        <TopicProvider>
         <Routes>
         
           <Route path="/" element={<h1>Home</h1>} />
@@ -172,6 +175,7 @@ const App: React.FC = () => {
           } />
           {/* Remove the extra closing brace below */}
         </Routes>
+        </TopicProvider>
       </ArticleProvider>
     </BrowserRouter>
   )

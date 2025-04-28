@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getAllTopics } from '../../api/topicsApi'; // Import the API function
+import { getAllTopics } from '../../api/topicsApi'; 
 
 interface Topic {
   _id: string;
@@ -28,7 +28,7 @@ const TopicsPage: React.FC = () => {
     const fetchTopics = async () => {
       try {
         const topicsData = await getAllTopics();
-        console.log('Fetched topics:', topicsData); // For debugging
+        console.log('Fetched topics:', topicsData); 
         setTopics(topicsData);
       } catch (err) {
         console.error('Error fetching topics:', err);

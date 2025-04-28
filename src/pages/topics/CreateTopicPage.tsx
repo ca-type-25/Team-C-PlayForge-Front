@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createTopic } from '../../api/topicsApi';
-import { getAllUsers   } from '../../api/usersApi'; // Import the users API function instead of axios
+import { getAllUsers   } from '../../api/usersApi'; 
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 
-// Add the Comment interface to match the expected type
+
 interface Comment {
   _id: string;
   content: string;
@@ -18,7 +18,7 @@ interface User {
   email?: string;
 }
 
-// Remove unused API_BASE_URL constant
+
 
 const CreateTopicPage: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -33,19 +33,19 @@ const CreateTopicPage: React.FC = () => {
   const [success, setSuccess] = useState<string | null>(null);
 
   useEffect(() => {
-    // Fetch users when component mounts
+    
     const fetchUsers = async () => {
       try {
-        // Use the getUsersApi function instead of direct api call
+      
         const response = await getAllUsers();
-        // Check if response.data exists before accessing its properties
+    
         if (response && response.data) {
           setUsers(response.data);
           if (response.data.length > 0) {
-            setUser(response.data[0]._id); // Set default user to first user
+            setUser(response.data[0]._id); 
           }
         } else {
-          // Handle case when response.data is undefined
+     
           setUsers([]);
           setError('No users data available');
         }
@@ -72,10 +72,10 @@ const CreateTopicPage: React.FC = () => {
     }
     
     try {
-      // Filter out any empty comments before submitting
+ 
       const validComments = comments.filter(comment => comment.content.trim() !== '');
       
-      // Create the topic with valid comments
+      
       await createTopic({ 
         title, 
         description, 
@@ -93,10 +93,10 @@ const CreateTopicPage: React.FC = () => {
     }
   };
 
-  // Helper function to add a new comment
+ 
   const addComment = () => {
     const newComment: Comment = {
-      _id: Date.now().toString(), // Generate a temporary ID
+      _id: Date.now().toString(), 
       content: '',
       user: users.length > 0 ? users[0]._id : '',
       createdAt: new Date().toISOString()
@@ -104,7 +104,7 @@ const CreateTopicPage: React.FC = () => {
     setComments([...comments, newComment]);
   };
 
-  // Helper function to update a comment
+
   const updateComment = (index: number, field: keyof Comment, value: string) => {
     const updatedComments = [...comments];
     updatedComments[index] = {
@@ -114,7 +114,7 @@ const CreateTopicPage: React.FC = () => {
     setComments(updatedComments);
   };
   
-  // Helper function to remove a comment
+ 
   const removeComment = (index: number) => {
     const updatedComments = [...comments];
     updatedComments.splice(index, 1);
