@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext'; 
 import { useNavigate, Link } from 'react-router-dom';
+import styles from './NavBar.module.scss'
 
 const Navbar: React.FC = () => {
   const { user, isAdmin, logout } = useAuth();
@@ -13,15 +14,14 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
-      {isAdmin && <Link to="/admin">Admin Panel</Link>}
       <Link to="/">Home</Link>
       <Link to="/games">Games</Link>
       <Link to="/articles">Articles</Link>
-      
+
       {!user && (
         <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/login" className={styles['link-name']}>Login</Link>
+          <Link to="/register" className={styles['link-name']}>Register</Link>
         </>
       )}
 
@@ -34,7 +34,6 @@ const Navbar: React.FC = () => {
       
       {user ? (
         <>
-
           <Link to={`/users/${user._id || user.id}`}>
             <span>Welcome, {user.username}</span>
           </Link>
@@ -42,7 +41,7 @@ const Navbar: React.FC = () => {
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
-        <button onClick={() => navigate('/login')}>Login</button>
+        <button onClick={() => navigate('/login')} >Login</button>
       )}
     </nav>
   );

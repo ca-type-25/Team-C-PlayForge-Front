@@ -1,0 +1,27 @@
+.page-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.review-item {
+    color: #3fd4ee;
+    text-decoration: none;
+    border: 1px solid blue;
+}
+
+.add-review {
+    color: #3fd4ee;
+    background-color: #336872;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.delete-review-button {
+    color: #3fd4ee;
+    background-color: #336872;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: none;
+}

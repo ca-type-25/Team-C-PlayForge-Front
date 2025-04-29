@@ -28,7 +28,6 @@ export const GamesProvider: React.FC<GamesPageContextProviderProps> = ({ childre
         setError(null)
         try {
             const { data } = await api.get('/games')
-
             setGames(data)
         } catch (error: unknown) {
             if (error instanceof Error) {

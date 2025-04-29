@@ -1,0 +1,22 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(21, 84, 156, 0.5); 
+    gap: 10px;
+}
+
+.link-name {
+    text-decoration: none;
+    color: #3fd4ee;
+}
+
+.logout-button {
+    color: #3fd4ee;
+    background-color: #336872;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+}
