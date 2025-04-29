@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router"
-import api from "../api"
-import ReviewForm from "../components/ReviewForm"
+import api from "../../api"
+import ReviewForm from "../../components/ReviewForm"
 import { AxiosError } from "axios"
 
 type ReviewFormProps = {
@@ -57,7 +57,7 @@ function EditReviewPage() {
             
             <ReviewForm editReviewData={review}/>
 
-            <button><Link to={`/reviews`}>Back to reviews list</Link></button>
+            <Link to={`/reviews`}>Back to reviews list</Link>
         </div>
     )
 }

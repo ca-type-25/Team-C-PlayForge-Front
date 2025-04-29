@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import api from "../api";
+import api from "../../api";
 import { Link, useParams } from "react-router";
 import { AxiosError } from "axios"
-import GenreForm from "../components/genreComponents/GenreForm";
+import GenreForm from "../../components/genreComponents/GenreForm";
 
 
 type GenreFormProps = {
@@ -51,7 +51,7 @@ function EditGenrePage() {
             
             <GenreForm editGenreData={genre}/>
 
-            <button><Link to={`/genres`}>Back to genres list</Link></button>
+            <Link to={`/genres`}>Back to genres list</Link>
         </div>
     )
 }

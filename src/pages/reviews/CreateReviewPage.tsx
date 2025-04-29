@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import ReviewForm from "../components/ReviewForm"
+import ReviewForm from "../../components/ReviewForm"
 
 
 function CreateReviewPage() {
@@ -8,7 +8,7 @@ function CreateReviewPage() {
         <div>
             <h1>Add New Review</h1>
             <ReviewForm />
-            <button><Link to={`/reviews`}>Back to reviews list</Link></button>
+            <Link to={`/reviews`}>Back to reviews list</Link>
         </div>
     )
 }

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Alert, Card, Row, Col } from 'react-bootstrap';
-import { createArticle } from '../../api/articlesApi';
-import { getAllUsers, User } from '../../api/usersApi';
-import { getAllSubjects, Subject } from '../../api/subjectsApi';
+import { createArticle } from '../../../api/articlesApi';
+import { getAllUsers, User } from '../../../api/usersApi';
+import { getAllSubjects, Subject } from '../../../api/subjectsApi';
 import Form from 'react-bootstrap/Form';
 import './CreateArticlePage.css';
 

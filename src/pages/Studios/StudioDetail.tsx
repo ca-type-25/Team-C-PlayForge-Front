@@ -44,6 +44,7 @@ const StudioDetail: React.FC = () => {
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
   if (!studio) return <div>No studio found.</div>
 
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>{studio.name}</h2>

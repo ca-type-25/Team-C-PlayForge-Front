@@ -16,9 +16,14 @@ const Navbar: React.FC = () => {
       {isAdmin && <Link to="/studios">Game Studios</Link>}
       <Link to="/games">Games</Link>
       <Link to="/articles">Articles</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/register">Register</Link>
+      <Link to="/reviews">Reviews</Link>
+      {!user && (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
       <Link to="/users">Users</Link>
+        </>
+      )}
       {user ? (
         <>
           <span>Welcome, {user.username}</span>

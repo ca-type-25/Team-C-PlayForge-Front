@@ -1,5 +1,5 @@
 import { Link } from "react-router"
-import GameForm from "../components/gameComponents/GameForm";
+import GameForm from "../../components/gameComponents/GameForm";
 
 
 function CreateGamePage() {
@@ -8,7 +8,7 @@ function CreateGamePage() {
         <div>
             <h1>Add New Game</h1>
             <GameForm />
-            <button><Link to={`/games`}>Back to games list</Link></button>
+            <Link to={`/games`}>Back to games list</Link>
         </div>
     )
 }
