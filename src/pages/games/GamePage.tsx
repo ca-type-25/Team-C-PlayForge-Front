@@ -4,6 +4,7 @@ import api from "../../api"
 import { useGames } from "../../contexts/GamePageContext"
 import styles from './GamePage.module.scss'
 import { useAuth } from "../../contexts/AuthContext"
+import Footer from "../../components/footer/Footer"
 
 interface Review {
     _id: string
@@ -115,18 +116,15 @@ const GamePage = () => {
                 </div>
             </div>
             <div className={styles['reviews-container']}>
-                <h2>Reviews</h2>
+                <h2 className={styles["review-title"]}>Reviews</h2>
                 <div>
                     <h3>Overall Rating: {renderStars(calculateAverageRating(reviews))}</h3>
                     {reviews.length > 0 ? (
                         reviews.map(review => (
                             <div key={review._id} className={styles["review-card"]}>
-                                <div className={styles["user-avatar"]}>
-                                    <img src="" alt="" />
-                                </div>
                                 <p className={styles["rating-stars"]}>{renderStars(review.rating)}</p>
                                 <span className={styles["date-posted"]}>Posted: {new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long' }).format(new Date(review.createdAt))}</span>
-                                <p>{review.feedback}</p>
+                                <p className={styles["review-feedback"]}>{review.feedback}</p>
                             </div>
                         ))
                     ) : (
@@ -137,6 +135,7 @@ const GamePage = () => {
                     <Link to={`/reviews/create?gameId=${game._id}`} className={styles["add-review-button"]}>Add a review</Link>
                 )}
             </div>
+            <Footer />
 
         </div>
     )

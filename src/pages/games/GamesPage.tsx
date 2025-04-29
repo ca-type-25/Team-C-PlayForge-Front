@@ -4,6 +4,7 @@ import { useGames } from "../../contexts/GamePageContext"
 import styles from './GamesPage.module.scss'
 import api from "../../api"
 import { useAuth } from "../../contexts/AuthContext"
+import Footer from "../../components/footer/Footer"
 
 type Genre = {
     _id: string;
@@ -56,56 +57,60 @@ const GamesPage = () => {
     }
 
     return (
-        <div className={styles['page-container']}>
-            <div className={styles['sidebar']}>
-                <h2>Browse by Genre</h2>
-                <ul>
-                    <li
-                        className={!selectedGenre ? styles['active-genre'] : ''}
-                        onClick={() => setSelectedGenre(null)}
-                    >
-                        All
-                    </li>
-                    {genres.map(genre => (
+        <div className={styles['page-margin']}>
+            <div className={styles['page-container']}>
+                <div className={styles['sidebar']}>
+                    <h2>Browse by Genre</h2>
+                    <ul>
                         <li
-                            key={genre._id}
-                            className={selectedGenre === genre._id ? styles['active-genre'] : ''}
-                            onClick={() => setSelectedGenre(genre._id)}
+                            className={!selectedGenre ? styles['active-genre'] : ''}
+                            onClick={() => setSelectedGenre(null)}
                         >
-                            {genre.title}
+                            All
                         </li>
-                    ))}
-                </ul>
-            </div>
-            <div className={styles['main-content']}>
-                <h1 className={styles.h1}>Games</h1>
-                <div className={styles['game-list']}>
-                    {filteredGames.map(game => (
-                        <div key={game._id} className={styles["game-card"]}>
-                            <img src={game.cover} alt={game.title} className={styles["game-image"]} />
-                            <div className={styles["game-info"]}>
-                                <Link to={`/games/${game._id}`} className={styles["game-title"]}>{game.title}</Link>
-                                <div className={styles['game-info-text']}>
-                                    <p>
-                                        <span className={styles['game-info-text-label']}>Studio:</span> {game.studio?.name}
-                                    </p>
-                                    <p>
-                                        <span className={styles['game-info-text-label']}>Genre:</span> {game.genres.map(genre => genre.title).join(', ')}
-                                    </p>
-                                    <p>
-                                        <span className={styles['game-info-text-label']}>Release date:</span> {game.release}
-                                    </p>
+                        {genres.map(genre => (
+                            <li
+                                key={genre._id}
+                                className={selectedGenre === genre._id ? styles['active-genre'] : ''}
+                                onClick={() => setSelectedGenre(genre._id)}
+                            >
+                                {genre.title}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className={styles['main-content']}>
+                    <h1 className={styles.h1}>Games</h1>
+                    <div className={styles['game-list']}>
+                        {filteredGames.map(game => (
+                            <div key={game._id} className={styles["game-card"]}>
+                                <img src={game.cover} alt={game.title} className={styles["game-image"]} />
+                                <div className={styles["game-info"]}>
+                                    <Link to={`/games/${game._id}`} className={styles["game-title"]}>{game.title}</Link>
+                                    <div className={styles['game-info-text']}>
+                                        <p>
+                                            <span className={styles['game-info-text-label']}>Studio:</span> {game.studio?.name}
+                                        </p>
+                                        <p>
+                                            <span className={styles['game-info-text-label']}>Genre:</span> {game.genres.map(genre => genre.title).join(', ')}
+                                        </p>
+                                        <p>
+                                            <span className={styles['game-info-text-label']}>Release date:</span> {game.release}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+                    {user && isAdmin && (
+                        <Link to='/games/create' className={styles["add-game-button"]}>
+                            Add new game
+                        </Link>
+                    )}
                 </div>
-                {user && isAdmin && (
-                    <Link to='/games/create' className={styles["add-game-button"]}>
-                        Add new game
-                    </Link>
-                )}
+
             </div>
+            <Footer />
         </div>
     );
 }
