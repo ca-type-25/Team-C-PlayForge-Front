@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
       {isAdmin && (
         <>
           <Link to="/users">Users</Link>
-          <Link to="admin/panel">Admin Panel</Link>
+          <Link to="/admin/panel">Admin Panel</Link>
         </>
       )}  
       
