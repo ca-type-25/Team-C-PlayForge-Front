@@ -95,7 +95,7 @@ const App: React.FC = () => {
             element={
               <AdminRoute>
                 <Routes>
-                  <Route path="" element={<AdminPanelPage />} />
+                  <Route path="admin/panel" element={<AdminPanelPage />} />
                   <Route path="games/create" element={<CreateGamePage />} />
                   <Route path="games/edit/:id" element={<EditGamePage />} />
                   <Route path="reviews/create" element={<CreateReviewPage />} />
