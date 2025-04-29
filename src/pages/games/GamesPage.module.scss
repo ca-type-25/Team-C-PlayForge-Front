@@ -23,6 +23,10 @@ h1 {
   
 }
 
+.page-margin {
+  margin-top: 20px;
+}
+
 .game-card {
   display: flex;
   border-radius: 8px;
@@ -69,12 +73,13 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: rgb(28, 39, 63);
+    background-color: rgb(29, 44, 78);
 
   }
 
   .game-info-text {
     padding-bottom: 50px;
+    color: rgb(146, 144, 144);
   }
 
   .game-info-text-label {

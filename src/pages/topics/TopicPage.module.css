@@ -1,0 +1,21 @@
+.page-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.topic-wrapper {
+  margin-bottom: 20px;
+  background-color: rgb(28, 34, 49);
+  border-radius: 10px;
+  padding: 20px 15px;
+}
+
+.topic-title,
+.created-by-user {
+  color: #82c8d6;
+}
+
+.topic-description {
+  color: #d1f7ff;
+}/*# sourceMappingURL=TopicPage.module.css.map */

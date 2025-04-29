@@ -2,6 +2,7 @@ import React from 'react';
 import longNoBorder from '../../assets/LogoLongNoBorder.png';
 import ArticlesList from '../../components/Articles/ArticlesList';
 import styles from "./HomePage.module.scss";
+import Footer from '../../components/footer/Footer';
 
 const HomePage: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ const HomePage: React.FC = () => {
           <ArticlesList hideCreateNew />
         </main>
       </div>
+      <Footer />
     </div>
   );
 };

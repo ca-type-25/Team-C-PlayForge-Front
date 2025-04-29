@@ -1,0 +1,34 @@
+.page-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.create-topic,
+.view-discussion {
+    color: #3fd4ee;
+    background-color: #336872;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.topic-wrapper {
+    margin-bottom: 20px;
+    background-color: rgb(28, 34, 49);
+    border-radius: 10px;
+    padding: 20px 15px;
+}
+
+.topic-title {
+    color: #82c8d6;
+}
+
+.topic-description {
+    color: #d1f7ff;
+}
+
+.comment-count {
+    color: #3fd4ee;
+}

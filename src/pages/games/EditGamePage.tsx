@@ -9,7 +9,7 @@ type GameFormProps = {
         _id: string,
         title: string,
         cover: string,
-        genre: string[],
+        genres: string[],
         description: string,
         studio: string,
         release: string,
@@ -30,6 +30,8 @@ function EditGamePage() {
 
             try {
                 const { data } = await api.get(`/games/${id}`)
+
+                
                 setGame(data)
             } catch (error) {
                 if (error instanceof AxiosError) {
