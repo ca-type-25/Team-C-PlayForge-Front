@@ -14,18 +14,23 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
       {isAdmin && <Link to="/admin">Admin Panel</Link>}
-      {isAdmin && <Link to="/studios">Game Studios</Link>}
+      <Link to="/">Home</Link>
       <Link to="/games">Games</Link>
       <Link to="/articles">Articles</Link>
-      <Link to="/reviews">Reviews</Link>
       
       {!user && (
         <>
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
-          <Link to="/users">Users</Link>
         </>
       )}
+
+      {isAdmin && (
+        <>
+          <Link to="/users">Users</Link>
+          <Link to="admin/panel">Admin Panel</Link>
+        </>
+      )}  
       
       {user ? (
         <>

@@ -40,20 +40,10 @@ import UserList from './components/Users/UserList';
 import UserForm from './components/Users/UserForm';
 import UserPage from './pages/Users/UserPage';
 import { ArticleProvider } from './contexts/ArticleContext';
-import SubjectsPage from './pages/subjects/SubjectsPage'
-import CreateSubjectPage from './pages/subjects/CreateSubjectPage'
-import EditSubjectPage from './pages/subjects/EditSubjectPage'
-import SubjectPage from './pages/subjects/SubjectPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import TopicsPage from './pages/TopicsPage/TopicsPage'
-import TopicPage from './pages/TopicPage/TopicPage'
-import CreateTopicPage from './pages/CreateTopicPage/CreateTopicPage'
-import EditTopicPage from './pages/EditTopicPage/EditTopicPage'
-import AdminRoute from './components/AdminRoute'
-import Navbar from './components/NavBar'
+
 import { GamesProvider } from './contexts/GamePageContext'
 import AdminPanelPage from './pages/adminPanelPage/AdminPanelPage'
+import Footer from './components/footer/Footer';
 
 const App: React.FC = () => {
   return (
@@ -135,6 +125,7 @@ const App: React.FC = () => {
 
         </Routes>
       </ArticleProvider>
+      <Footer />
     </BrowserRouter>
   );
 };
