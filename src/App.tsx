@@ -1,62 +1,46 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import GamesPage from './pages/games/GamesPage'
-import GamePage from './pages/games/GamePage'
-import CreateGamePage from './pages/games/CreateGamePage'
-import EditGamePage from './pages/games/EditGamePage'
-import ReviewsPage from './pages/reviews/ReviewsPage'
-import ReviewPage from './pages/reviews/ReviewPage'
-import CreateReviewPage from './pages/reviews/CreateReviewPage'
-import EditReviewPage from './pages/reviews/EditReviewPage'
-import CommentsPage from './pages/comments/CommentsPage'
-import CommentPage from './pages/comments/CommentPage'
-import CreateCommentPage from './pages/comments/createCommentPage'
-import EditCommentPage from './pages/comments/EditCommentPage'
-import GameStudios from './pages/Studios/GameStudios';
-import StudioDetail from './pages/Studios/StudioDetail';
-import CreateStudio from './pages/Studios/CreateStudio';
-import EditStudio from './pages/Studios/EditStudio';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import GamesPage from './pages/games/GamesPage';
+import GamePage from './pages/games/GamePage';
+import CreateGamePage from './pages/games/CreateGamePage';
+import EditGamePage from './pages/games/EditGamePage';
+import ReviewsPage from './pages/reviews/ReviewsPage';
+import ReviewPage from './pages/reviews/ReviewPage';
+import CreateReviewPage from './pages/reviews/CreateReviewPage';
+import EditReviewPage from './pages/reviews/EditReviewPage';
+import CommentsPage from './pages/comments/CommentsPage';
+// import CommentPage from './pages/comments/CommentPage';
+// import CreateCommentPage from './pages/comments/CreateCommentPage';
+// import EditCommentPage from './pages/comments/EditCommentPage';
+// import GameStudios from './pages/studios/GameStudios';
+// import StudioDetail from './pages/studios/StudioDetail';
+// import CreateStudio from './pages/studios/CreateStudio';
+// import EditStudio from './pages/studios/EditStudio';
 import HomePage from './pages/HomePage/HomePage';
-import ArticlePage from './pages/articles/ArticlePage'; 
-import ArticlesPage from './pages/articles/ArticlesPage'; 
+import ArticlePage from './pages/articles/ArticlePage';
+import ArticlesPage from './pages/articles/ArticlesPage';
 import CreateArticlePage from './pages/articles/CreateArticlePage/CreateArticlePage';
 import EditArticlePage from './pages/articles/EditArticlePage';
-import GenresPage from './pages/genres/GenresPage'
-import GenrePage from './pages/genres/GenrePage'
-import CreateGenrePage from './pages/genres/CreateGenrePage'
-import EditGenrePage from './pages/genres/EditGenrePage'
+import GenresPage from './pages/genres/GenresPage';
+import GenrePage from './pages/genres/GenrePage';
+import CreateGenrePage from './pages/genres/CreateGenrePage';
+import EditGenrePage from './pages/genres/EditGenrePage';
+import SubjectsPage from './pages/subjects/SubjectsPage';
+import CreateSubjectPage from './pages/subjects/CreateSubjectPage';
+import EditSubjectPage from './pages/subjects/EditSubjectPage';
+import SubjectPage from './pages/subjects/SubjectPage';
+import LoginPage from './pages/Users/LoginPage';
+import RegisterPage from './pages/Users/RegisterPage';
+// import TopicsPage from './pages/topics/TopicsPage';
+// import TopicPage from './pages/topics/TopicPage';
+// import CreateTopicPage from './pages/topics/CreateTopicPage';
+// import EditTopicPage from './pages/topics/EditTopicPage';
+import AdminRoute from './components/AdminRoute';
+import Navbar from './components/NavBar';
+import UserList from './components/Users/UserList';
+import UserForm from './components/Users/UserForm';
+import UserPage from './pages/Users/UserPage';
 import { ArticleProvider } from './contexts/ArticleContext';
-import SubjectsPage from './pages/SubjectsPage/SubjectsPage'
-import CreateSubjectPage from './pages/CreateSubjectPage/CreateSubjectPage'
-import EditSubjectPage from './pages/EditSubjectPage/EditSubjectPage'
-import SubjectPage from './pages/SubjectPage/SubjectPage'
-import LoginPage from './pages/Users/LoginPage'
-import RegisterPage from './pages/Users/RegisterPage'
-import AdminRoute from './components/AdminRoute'
-import Navbar from './components/NavBar'
-import UserList from './components/Users/UserList'
-import UserForm from './components/Users/UserForm'
-import UserPage from './pages/Users/UserPage'
-
-import SubjectsPage from './pages/subjects/SubjectsPage'
-import CreateSubjectPage from './pages/subjects/CreateSubjectPage'
-import EditSubjectPage from './pages/subjects/EditSubjectPage'
-import SubjectPage from './pages/subjects/SubjectPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import TopicsPage from './pages/TopicsPage/TopicsPage'
-import TopicPage from './pages/TopicPage/TopicPage'
-import CreateTopicPage from './pages/CreateTopicPage/CreateTopicPage'
-import EditTopicPage from './pages/EditTopicPage/EditTopicPage'
-
-
-
-import AdminRoute from './components/AdminRoute'
-import Navbar from './components/NavBar'
-import UserList from './components/Users/UserList'
-import UserForm from './components/Users/UserForm'
-import UserPage from './pages/Users/UserPage'
-
-import { GamesProvider } from './contexts/GamePageContext'
+import { GamesProvider } from './contexts/GamePageContext';
 
 const App: React.FC = () => {
   return (
@@ -64,12 +48,11 @@ const App: React.FC = () => {
       <Navbar />
       <ArticleProvider>
         <Routes>
-        
           <Route path="/" element={<HomePage />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          
+
           <Route path="/games" element={
             <GamesProvider>
               <GamesPage />
@@ -103,11 +86,9 @@ const App: React.FC = () => {
           <Route path="/genres" element={<GenresPage />} />
           <Route path="/genres/:id" element={<GenrePage />} />
 
-          
           <Route path="/users" element={<UserList />} />
           <Route path="/users/:id" element={<UserPage />} />
           <Route path="/edit/:id" element={<UserForm />} />
-
 
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/topics/:id" element={<TopicPage />} />
@@ -193,11 +174,10 @@ const App: React.FC = () => {
               <EditTopicPage />
             </AdminRoute>
           } />
-        
         </Routes>
       </ArticleProvider>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default App;
