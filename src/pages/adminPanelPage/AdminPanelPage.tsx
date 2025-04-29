@@ -47,7 +47,7 @@ const AdminPanelPage: React.FC = () => {
             <th>Email</th>
             <th>Role</th>
             <th>Actions</th>
-          </tr>6
+          </tr>
         </thead>
         <tbody>
           {users.map((user) => (
