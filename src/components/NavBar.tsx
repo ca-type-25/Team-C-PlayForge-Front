@@ -13,21 +13,32 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={styles['navbar']}>
-      {isAdmin && <Link to="/studios" className={styles['link-name']}>Game Studios</Link>}
-      <Link to="/games" className={styles['link-name']}>Games</Link>
-      <Link to="/articles" className={styles['link-name']}>Articles</Link>
-      <Link to="/reviews" className={styles['link-name']}>Reviews</Link>
+    <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
+      <Link to="/">Home</Link>
+      <Link to="/games">Games</Link>
+      <Link to="/articles">Articles</Link>
+
       {!user && (
         <>
           <Link to="/login" className={styles['link-name']}>Login</Link>
           <Link to="/register" className={styles['link-name']}>Register</Link>
         </>
       )}
+
+      {isAdmin && (
+        <>
+          <Link to="/users">Users</Link>
+          <Link to="admin/panel">Admin Panel</Link>
+        </>
+      )}  
+      
       {user ? (
         <>
-          <span>Welcome, {user.username}</span>
-          <button onClick={handleLogout} className={styles['logout-button']}>Logout</button>
+          <Link to={`/users/${user._id || user.id}`}>
+            <span>Welcome, {user.username}</span>
+          </Link>
+
+          <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <button onClick={() => navigate('/login')} >Login</button>

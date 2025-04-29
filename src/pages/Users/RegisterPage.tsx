@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../contexts/AuthContext'
+import { registerUser } from '../../contexts/AuthContext'
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');

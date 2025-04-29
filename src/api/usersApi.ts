@@ -6,6 +6,7 @@ export interface User {
   _id: string;
   username: string;
   email?: string;
+  role: string;
 }
 
 // Use the same token retrieval method as in topicsApi.ts
@@ -87,5 +88,55 @@ export const registerUser = async (userData: { username: string; email: string; 
   } catch (error) {
     console.error('Registration failed:', error);
     throw error;
+  }
+};
+
+export const updateUserRole = async (id: string, role: string) => {
+  try {
+    const token = getAuthToken();
+
+    if (!token) {
+      console.error('No authentication token found');
+      return null;
+    }
+
+    const response = await axios.put(
+      `${API_BASE_URL}/users/${id}`,
+      { role },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating user role for ID ${id}:`, error);
+    return null;
+  }
+};
+
+export const deleteUser = async (id: string) => {
+  try {
+    const token = getAuthToken();
+
+    if (!token) {
+      console.error('No authentication token found');
+      return null;
+    }
+
+    const response = await axios.delete(`${API_BASE_URL}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting user with ID ${id}:`, error);
+    return null;
   }
 };
