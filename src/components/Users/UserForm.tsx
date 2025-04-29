@@ -51,9 +51,14 @@ function UserForm() {
 
     try {
       if (id) {
-        await updateUser(id, formData as User);
-        navigate(`/users`);
+        const updates = { ...formData };
+        if (!updates.password) {
+          delete updates.password;
+        }
+        await updateUser(id, updates as User);
+        navigate(`/users/${id}`);
       }
+      
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors({ ...errors, server: error.response?.data.message });

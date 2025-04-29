@@ -11,6 +11,7 @@ function UserList() {
   const token = localStorage.getItem('token');
   const currentUser = token ? jwtDecode<{ id: string; role: string }>(token) : null;
   const isAdmin = currentUser?.role === 'ADMIN';
+  const isModerator = currentUser?.role === 'MODERATOR';
 
   const fetchUsers = async () => {
     try {
@@ -34,7 +35,7 @@ function UserList() {
     }
   };
 
-  const handleRoleChange = async (userId: string, newRole: 'USER' | 'ADMIN') => {
+  const handleRoleChange = async (userId: string, newRole: 'USER' | 'ADMIN' | 'MODERATOR' ) => {
     if (window.confirm(`Change this user's role to ${newRole}?`)) {
       await changeUserRole(userId, newRole);
       fetchUsers();
@@ -44,6 +45,7 @@ function UserList() {
   if (loading) {
     return <div className="loading-spinner">Loading...</div>;
   }
+  
 
   return (
     <div className="user-list-container">
@@ -59,8 +61,8 @@ function UserList() {
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
+            {(isAdmin || isModerator) && <th>Role</th>}
+            {(isAdmin || isModerator) && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -72,15 +74,15 @@ function UserList() {
                 </Link>
               </td>
               <td>{user.email}</td>
+              {(isAdmin || isModerator) &&
               <td>
                 {user.role}
                 {user.role === 'ADMIN'}
               </td>
+              }
               <td>
                 <div className="action-buttons">
-                  <Link to={`/edit/${user._id}`} className="btn-edit">
-                    Edit
-                  </Link>
+
                   
                   {isAdmin && user._id !== currentUser?.id && (
                     <>
@@ -90,22 +92,16 @@ function UserList() {
                       >
                         Delete
                       </button>
-                      
-                      {user.role !== 'ADMIN' ? (
-                        <button
-                          onClick={() => handleRoleChange(user._id, 'ADMIN')}
-                          className="btn-promote"
-                        >
-                           Make Admin
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => handleRoleChange(user._id, 'USER')}
-                          className="btn-demote"
-                        >
-                           Make User
-                        </button>
-                      )}
+
+                      <select
+                        value={user.role}
+                        onChange={(e) => handleRoleChange(user._id, e.target.value as 'USER' | 'ADMIN' | 'MODERATOR')}
+                        className="role-select"
+                      >
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="MODERATOR">Moderator</option>
+                      </select>
                     </>
                   )}
                 </div>

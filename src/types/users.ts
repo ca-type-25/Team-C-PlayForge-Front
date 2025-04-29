@@ -8,7 +8,7 @@ export interface User {
   age?: number;
   bio?: string;
   avatar?: string;
-  role?: 'USER' | 'ADMIN';
+  role?: 'USER' | 'ADMIN' | 'MODERATOR';
   comments?: string[];
   reviews?: string[];
 }

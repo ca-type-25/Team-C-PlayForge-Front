@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { registerUser } from '../api/users'; // adjust path as needed
+import { registerUser } from '../api/users';
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState('');

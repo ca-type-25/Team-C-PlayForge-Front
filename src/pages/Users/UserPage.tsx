@@ -12,6 +12,8 @@ function UserPage() {
 
   const token = localStorage.getItem('token');
   const currentUser: { id?: string; role?: string } = token ? jwtDecode(token) : {};
+  const isAdmin = currentUser?.role === 'ADMIN';
+  const isModerator = currentUser?.role === 'MODERATOR';
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -42,7 +44,7 @@ function UserPage() {
   return (
     <div className="user-page">
       <div className="user-header">
-        <img src={user.avatar || '/default-avatar.png'} alt="Avatar" className="avatar" />
+        <img src={user.avatar} alt="Avatar" className="avatar" />
         <h1>{user.name} {user.surname}</h1>
         <p className="username">@{user.username}</p>
       </div>
@@ -51,17 +53,22 @@ function UserPage() {
         <p><strong>Email:</strong> {user.email}</p>
         {user.age && <p><strong>Age:</strong> {user.age}</p>}
         {user.bio && <p><strong>Bio:</strong> {user.bio}</p>}
-        <p><strong>Role:</strong> {user.role}</p>
+
+        {isAdmin || isModerator && <p><strong>Role:</strong> {user.role}</p>}
       </div>
 
-      {(currentUser.id === user._id || currentUser.role === 'ADMIN') && (
+    
         <div className="user-actions">
-          <Link to={`/edit/${user._id}`} className="btn-edit">Edit Profile</Link>
-          {currentUser.role === 'ADMIN' && (
+                  {user._id === currentUser?.id && (
+            <Link to={`/edit/${user._id}`} className="btn-edit">
+              Edit
+            </Link>
+          )}
+          {isAdmin && (
             <button onClick={handleDelete} className="btn-delete">Delete User</button>
           )}
         </div>
-      )}
+      
     </div>
   );
 }
