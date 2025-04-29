@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router"
 import api from "../../api"
 import { useGames } from "../../contexts/GamePageContext"
 import styles from './GamePage.module.scss'
+import { useAuth } from "../../contexts/AuthContext"
 
 interface Review {
     _id: string
@@ -19,6 +20,7 @@ interface Review {
 
 const GamePage = () => {
     const { game, loading, error, fetchGameById } = useGames()
+    const { user, isAdmin } = useAuth()
     const { id } = useParams()
 
     const navigate = useNavigate()
@@ -89,10 +91,12 @@ const GamePage = () => {
 
     return (
         <div className={styles['page-container']}>
-            <div className={styles["action-buttons"]}>
-                <Link to={`/games/edit/${game._id}`} className={styles["edit-button"]}>Edit game</Link>
-                <button onClick={deleteHandler} className={styles["delete-button"]}>Delete</button>
-            </div>
+            {user && isAdmin && (
+                <div className={styles["action-buttons"]}>
+                    <Link to={`/games/edit/${game._id}`} className={styles["edit-button"]}>Edit game</Link>
+                    <button onClick={deleteHandler} className={styles["delete-button"]}>Delete</button>
+                </div>
+            )}
             <h1>{game.title}</h1>
             <div className={styles["game-card"]}>
                 <div>
@@ -113,7 +117,7 @@ const GamePage = () => {
             <div className={styles['reviews-container']}>
                 <h2>Reviews</h2>
                 <div>
-                    <h3>Average Rating: {renderStars(calculateAverageRating(reviews))}</h3>
+                    <h3>Overall Rating: {renderStars(calculateAverageRating(reviews))}</h3>
                     {reviews.length > 0 ? (
                         reviews.map(review => (
                             <div key={review._id} className={styles["review-card"]}>
@@ -129,7 +133,9 @@ const GamePage = () => {
                         <p>No reviews available.</p>
                     )}
                 </div>
-                <Link to={`/reviews/create?gameId=${game._id}`} className={styles["add-review-button"]}>Add a review</Link>
+                {user && isAdmin && (
+                    <Link to={`/reviews/create?gameId=${game._id}`} className={styles["add-review-button"]}>Add a review</Link>
+                )}
             </div>
 
         </div>

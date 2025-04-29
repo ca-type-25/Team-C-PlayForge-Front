@@ -18,7 +18,7 @@ type GameFormProps = {
         _id: string,
         title: string,
         cover: string,
-        genre: string[],
+        genres: string[],
         description: string,
         studio: string,
         release: string,
@@ -31,15 +31,15 @@ function GameForm(props: GameFormProps) {
 
     const { editGameData } = props
 
-    const [title, setTitle] = useState('')
-    const [cover, setCover] = useState('')
+    const [title, setTitle] = useState(editGameData?.title || '')
+    const [cover, setCover] = useState(editGameData?.cover || '')
     const [genres, setGenres] = useState<Genre[]>([])
-    const [selectedGenre, setSelectedGenre] = useState('')
-    const [description, setDescription] = useState('')
+    const [selectedGenre, setSelectedGenre] = useState(editGameData?.genres[0] || '')
+    const [description, setDescription] = useState(editGameData?.description || '')
     const [studios, setStudios] = useState<Studio[]>([])
-    const [selectedStudio, setSelectedStudio] = useState('')
-    const [release, setRelease] = useState('')
-    const [video, setVideo] = useState('')
+    const [selectedStudio, setSelectedStudio] = useState(editGameData?.studio || '')
+    const [release, setRelease] = useState(editGameData?.release || '')
+    const [video, setVideo] = useState(editGameData?.video || '')
 
     const navigate = useNavigate()
 
@@ -49,12 +49,12 @@ function GameForm(props: GameFormProps) {
             const genresData = res.data
 
             setGenres(genresData)
-            setSelectedGenre(genresData[0]._id || '')
+            setSelectedGenre(editGameData?.genres[0] || genresData[0]?._id || '')
             
         }
         fetchGenres()
 
-    }, [])
+    }, [editGameData])
 
     useEffect(() => {
         const fetchStudios = async () => {
@@ -62,12 +62,12 @@ function GameForm(props: GameFormProps) {
             const studiosData = res.data
 
             setStudios(studiosData)
-            setSelectedStudio(studiosData[0]._id || '')
+            setSelectedStudio(editGameData?.studio || studiosData[0]?._id || '')
             
         }
         fetchStudios()
 
-    }, [])
+    }, [editGameData])
 
 
     const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)

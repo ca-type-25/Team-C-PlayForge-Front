@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext'; 
 import { useNavigate, Link } from 'react-router-dom';
+import styles from './NavBar.module.scss'
 
 const Navbar: React.FC = () => {
   const { user, isAdmin, logout } = useAuth();
@@ -12,24 +13,24 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
-      {isAdmin && <Link to="/studios">Game Studios</Link>}
-      <Link to="/games">Games</Link>
-      <Link to="/articles">Articles</Link>
-      <Link to="/reviews">Reviews</Link>
+    <nav className={styles['navbar']}>
+      {isAdmin && <Link to="/studios" className={styles['link-name']}>Game Studios</Link>}
+      <Link to="/games" className={styles['link-name']}>Games</Link>
+      <Link to="/articles" className={styles['link-name']}>Articles</Link>
+      <Link to="/reviews" className={styles['link-name']}>Reviews</Link>
       {!user && (
         <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/login" className={styles['link-name']}>Login</Link>
+          <Link to="/register" className={styles['link-name']}>Register</Link>
         </>
       )}
       {user ? (
         <>
           <span>Welcome, {user.username}</span>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className={styles['logout-button']}>Logout</button>
         </>
       ) : (
-        <button onClick={() => navigate('/login')}>Login</button>
+        <button onClick={() => navigate('/login')} >Login</button>
       )}
     </nav>
   );
