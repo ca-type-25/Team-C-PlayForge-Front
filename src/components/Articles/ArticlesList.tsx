@@ -7,9 +7,11 @@ import { getAllArticles } from '../../api/articlesApi';
 import { useArticle } from '../../contexts/ArticleContext';
 
 
+interface ArticlesListProps {
+  hideCreateNew?: boolean; 
+}
 
-
-const ArticlesList: React.FC = () => {
+const ArticlesList: React.FC<ArticlesListProps> = ({ hideCreateNew }) => {
   const { articles, setArticles, isLoading, setIsLoading, error, setError } = useArticle();
 
   useEffect(() => {
@@ -48,9 +50,11 @@ const ArticlesList: React.FC = () => {
     <Container className="mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1>Articles</h1>
-        <Link to="/articles/create" className="btn btn-primary">
-          Create New Article
-        </Link>
+        {!hideCreateNew && ( 
+          <Link to="/articles/create" className="btn btn-primary">
+            Create New Article
+          </Link>
+        )}
       </div>
 
       <Row>
