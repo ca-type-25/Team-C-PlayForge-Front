@@ -13,6 +13,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar" style={{ display: 'flex', gap: '10px' }}>
+      {isAdmin && <Link to="/admin">Admin Panel</Link>}
       {isAdmin && <Link to="/studios">Game Studios</Link>}
       <Link to="/games">Games</Link>
       <Link to="/articles">Articles</Link>
