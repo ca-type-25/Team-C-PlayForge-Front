@@ -90,93 +90,32 @@ const App: React.FC = () => {
           <Route path="/topics" element={<TopicsPage />} />
           <Route path="/topics/:id" element={<TopicPage />} />
 
-          {/* Admin-Only Routes */}
-          <Route path="/games/create" element={
-            <AdminRoute>
-              <CreateGamePage />
-            </AdminRoute>
-          } />
-          <Route path="/games/edit/:id" element={
-            <AdminRoute>
-              <EditGamePage />
-            </AdminRoute>
-          } />
-          <Route path="/reviews/create" element={
-            <AdminRoute>
-              <CreateReviewPage />
-            </AdminRoute>
-          } />
-          <Route path="/reviews/edit/:id" element={
-            <AdminRoute>
-              <EditReviewPage />
-            </AdminRoute>
-          } />
-          <Route path="/comments/create" element={
-            <AdminRoute>
-              <CreateCommentPage />
-            </AdminRoute>
-          } />
-          <Route path="/comments/edit/:id" element={
-            <AdminRoute>
-              <EditCommentPage />
-            </AdminRoute>
-          } />
-          <Route path="/studios/create" element={
-            <AdminRoute>
-              <CreateStudio />
-            </AdminRoute>
-          } />
-          <Route path="/studios/:id/edit" element={
-            <AdminRoute>
-              <EditStudio />
-            </AdminRoute>
-          } />
-          <Route path="/articles/create" element={
-            <AdminRoute>
-              <CreateArticlePage />
-            </AdminRoute>
-          } />
-          <Route path="/articles/:id/edit" element={
-            <AdminRoute>
-              <EditArticlePage />
-            </AdminRoute>
-          } />
-          <Route path="/genres/create" element={
-            <AdminRoute>
-              <CreateGenrePage />
-            </AdminRoute>
-          } />
-          <Route path="/genres/edit/:id" element={
-            <AdminRoute>
-              <EditGenrePage />
-            </AdminRoute>
-          } />
-          <Route path="/subjects/create" element={
-            <AdminRoute>
-              <CreateSubjectPage />
-            </AdminRoute>
-          } />
-          <Route path="/subjects/:id/edit" element={
-            <AdminRoute>
-              <EditSubjectPage />
-            </AdminRoute>
-          } />
-          <Route path="/topics/create" element={
-            <AdminRoute>
-              <CreateTopicPage />
-            </AdminRoute>
-          } />
-          <Route path="/topics/:id/edit" element={
-            <AdminRoute>
-              <EditTopicPage />
-            </AdminRoute>
-          } />
-          <Route path="/admin" element={
-            <AdminRoute>
-              <AdminPanelPage />
-            </AdminRoute>
-          } />
-          {/* Remove the extra closing brace below */}
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <Routes>
+                  <Route path="" element={<AdminPanelPage />} />
+                  <Route path="games/create" element={<CreateGamePage />} />
+                  <Route path="games/edit/:id" element={<EditGamePage />} />
+                  <Route path="reviews/create" element={<CreateReviewPage />} />
+                  <Route path="reviews/edit/:id" element={<EditReviewPage />} />
+                  <Route path="comments/create" element={<CreateCommentPage />} />
+                  <Route path="comments/edit/:id" element={<EditCommentPage />} />
+                  <Route path="studios/create" element={<CreateStudio />} />
+                  <Route path="studios/:id/edit" element={<EditStudio />} />
+                  <Route path="articles/create" element={<CreateArticlePage />} />
+                  <Route path="articles/:id/edit" element={<EditArticlePage />} />
+                  <Route path="genres/create" element={<CreateGenrePage />} />
+                  <Route path="genres/edit/:id" element={<EditGenrePage />} />
+                  <Route path="subjects/create" element={<CreateSubjectPage />} />
+                  <Route path="subjects/:id/edit" element={<EditSubjectPage />} />
+                  <Route path="topics/create" element={<CreateTopicPage />} />
+                  <Route path="topics/:id/edit" element={<EditTopicPage />} />
+                </Routes>
+              </AdminRoute>
+            }
+          />
         </Routes>
       </ArticleProvider>
     </BrowserRouter>
