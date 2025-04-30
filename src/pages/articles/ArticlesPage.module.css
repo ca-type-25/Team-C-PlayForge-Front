@@ -1,0 +1,15 @@
+.articlesPageContainer {
+  padding: 2rem 0;
+}
+.articlesPageContainer .pageTitle {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+.articlesPageContainer .articlesWrapper {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}/*# sourceMappingURL=ArticlesPage.module.css.map */

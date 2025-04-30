@@ -37,10 +37,14 @@ export const getArticleById = async (id: string) => {
 
 export const createArticle = async (articleData: ArticleData) => {
   try {
-    console.log('Sending article data:', JSON.stringify(articleData));
-    
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found. Please log in again.');
+    }
+    console.log('Sending article data:', articleData);
     const response = await axios.post(`${API_BASE_URL}/articles`, articleData, {
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     });
@@ -54,7 +58,16 @@ export const createArticle = async (articleData: ArticleData) => {
 
 export const updateArticle = async (id: string, articleData: ArticleData) => {
   try {
-    const response = await axios.put(`${API_BASE_URL}/articles/${id}`, articleData);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found. Please log in again.');
+    }
+    const response = await axios.put(`${API_BASE_URL}/articles/${id}`, articleData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error(`Error updating article with ID ${id}:`, error);
@@ -65,7 +78,16 @@ export const updateArticle = async (id: string, articleData: ArticleData) => {
 
 export const deleteArticle = async (id: string) => {
   try {
-    const response = await axios.delete(`${API_BASE_URL}/articles/${id}`);
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Authentication token not found. Please log in again.');
+    }
+    const response = await axios.delete(`${API_BASE_URL}/articles/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     return response.data;
   } catch (error) {
     console.error(`Error deleting article with ID ${id}:`, error);

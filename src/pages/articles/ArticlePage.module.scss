@@ -1,0 +1,45 @@
+.articlePageContainer {
+  padding: 2rem 0;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  
+  .articleWrapper {
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    // Add some padding inside the container
+    :global(.container) {
+      padding: 1.5rem;
+    }
+    
+    // Style the card inside
+    :global(.card) {
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+    
+    // Style the header
+    :global(.card-header) {
+      background: transparent;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      font-weight: 600;
+    }
+    
+    // Style the content
+    :global(.article-content) {
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+  }
+}

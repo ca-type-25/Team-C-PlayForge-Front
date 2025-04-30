@@ -24,9 +24,7 @@ h1 {
 
 .game-card {
   display: flex;
-  border: 1px solid #e1e1e1;
   border-radius: 8px;
-  background-color: #ffffff;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -118,20 +116,4 @@ h1 {
 .sidebar .active-genre {
   background-color: #336872;
   color: white;
-
-}
-.game-card .game-info .game-rating {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-}
-.game-card .game-info .game-rating .rating-score {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #4caf50;
-  margin-right: 8px;
-}
-.game-card .game-info .game-rating .rating-text {
-  font-size: 1.2rem;
-  color: #888;
 }/*# sourceMappingURL=GamesPage.module.css.map */
