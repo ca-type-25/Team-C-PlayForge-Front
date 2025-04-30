@@ -45,7 +45,7 @@ const EditArticlePage: React.FC = () => {
       setError(null);
       try {
         // Fetch article, users, and subjects data in parallel
-        const [articleData, usersData, subjectsData] = await Promise.all([
+        const [articleData, usersResponse, subjectsResponse] = await Promise.all([
           getArticleById(id),
           getAllUsers(),
           getAllSubjects()
@@ -61,12 +61,18 @@ const EditArticlePage: React.FC = () => {
           users: users || [],
           subjects: subjects || []
         });
-        
-        setAvailableUsers(usersData);
-        setAvailableSubjects(subjectsData);
+
+        // Handle .data property for users and subjects if present
+        const usersArray = usersResponse?.data ? usersResponse.data : Array.isArray(usersResponse) ? usersResponse : [];
+        const subjectsArray = subjectsResponse?.data ? subjectsResponse.data : Array.isArray(subjectsResponse) ? subjectsResponse : [];
+
+        setAvailableUsers(usersArray);
+        setAvailableSubjects(subjectsArray);
       } catch (err) {
         console.error("Failed to fetch data for editing", err);
         setError("Failed to load necessary data. Please try again.");
+        setAvailableUsers([]); // fallback to empty array on error
+        setAvailableSubjects([]); // fallback to empty array on error
       } finally {
         setInitialLoading(false);
       }
@@ -189,11 +195,15 @@ const EditArticlePage: React.FC = () => {
                     value={formData.users}
                     onChange={handleMultiSelectChange}
                   >
-                    {availableUsers.map(user => (
-                      <option key={user._id} value={user._id}>
-                        {user.username}
-                      </option>
-                    ))}
+                    {Array.isArray(availableUsers) && availableUsers.length > 0 ? (
+                      availableUsers.map(user => (
+                        <option key={user._id} value={user._id}>
+                          {user.username}
+                        </option>
+                      ))
+                    ) : (
+                      <option disabled>No users available</option>
+                    )}
                   </Form.Select>
                   <Form.Text className="text-muted">
                     Hold Ctrl (or Cmd on Mac) to select multiple users

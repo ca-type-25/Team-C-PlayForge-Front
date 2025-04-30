@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Alert, Card, Row, Col } from 'react-bootstrap';
 import { createArticle } from '../../../api/articlesApi';
-import { getAllUsers, User } from '../../../api/usersApi';
+import { getUsers } from '../../../api/users';
+import { User } from '../../../types/users';
 import { getAllSubjects, Subject } from '../../../api/subjectsApi';
 import Form from 'react-bootstrap/Form';
 import './CreateArticlePage.css';
@@ -39,23 +40,51 @@ const CreateArticlePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-       
-        const [usersData, subjectsData] = await Promise.all([
-          getAllUsers(),
-          getAllSubjects()
-        ]);
-        
-        
-        if (Array.isArray(usersData)) {
-          setAvailableUsers(usersData);
-        }
-        
+        // Try fetching subjects first
+        const subjectsData = await getAllSubjects();
         if (Array.isArray(subjectsData)) {
           setAvailableSubjects(subjectsData);
         }
+        
+        try {
+          // Check if token exists before making the request
+          const token = localStorage.getItem('token');
+          if (!token) {
+            console.warn("No authentication token found. User data may be restricted.");
+            // Consider setting a message for the user that they need to log in
+            setAvailableUsers([]);
+            return; // Skip the API call if no token
+          }
+          
+          // Log token format (first few characters) for debugging
+          console.log("Token format check:", token.substring(0, 20) + "...");
+          
+          try {
+            const response = await getUsers();
+            if (response && response.data && Array.isArray(response.data)) {
+              setAvailableUsers(response.data);
+            } else {
+              console.warn("Users data format unexpected:", response);
+              setAvailableUsers([]);
+            }
+          } catch (userErr) {
+            console.error("Failed to fetch users:", userErr);
+            // Make the form usable even without user data
+            setAvailableUsers([]);
+            
+            // Check if this is an authentication error
+            if ((userErr as { response?: { status: number } }).response?.status === 401 || (userErr as { response?: { status: number } }).response?.status === 403) {
+              console.warn("Authentication issue - user may need to log in");
+            }
+          }
+        } catch (userErr) {
+          console.error("Failed to fetch users:", userErr);
+          // Don't set error state for the whole form, just log it
+          // The form can still work without user data
+        }
       } catch (err) {
         console.error("Failed to fetch data:", err);
-        setError("Failed to load users and subjects data. You can still create an article without selecting users or subjects.");
+        setError("Failed to load some data. You can still create an article with available options.");
       }
     };
 
@@ -82,11 +111,19 @@ const CreateArticlePage: React.FC = () => {
     setLoading(true);
     setError(null);
     setSuccess(null);
-
+  
+    // Check if user is authenticated
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('You must be logged in to create an article. Please log in and try again.');
+      setLoading(false);
+      return;
+    }
+  
     if (!formData.title || !formData.content) {
-        setError('Title and Content are required.');
-        setLoading(false);
-        return;
+      setError('Title and Content are required.');
+      setLoading(false);
+      return;
     }
 
 
@@ -117,7 +154,15 @@ const CreateArticlePage: React.FC = () => {
 
     } catch (err) {
       console.error('Error creating article:', err);
-      setError('Failed to create article. Please try again.');
+      
+      // Check for authentication errors specifically
+      if ((err as { response?: { status: number } }).response?.status === 401) {
+        setError('Authentication failed. Please log in again and try creating the article.');
+        // Optionally redirect to login page
+        // setTimeout(() => navigate('/login'), 1500);
+      } else {
+        setError('Failed to create article. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -194,7 +239,7 @@ const CreateArticlePage: React.FC = () => {
                     {availableUsers.length > 0 ? (
                       availableUsers.map(user => (
                         <option key={user._id} value={user._id}>
-                          {user.username || `User ${user._id.substring(0, 6)}`}
+                          {user.name || `User ${user._id?.substring(0, 6) || 'Unknown'}`}
                         </option>
                       ))
                     ) : (
